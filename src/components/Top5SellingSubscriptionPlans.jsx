@@ -1,0 +1,129 @@
+import React, { useState, useEffect } from "react";
+import { Select } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+
+const plans = [
+  { key: 1, plan: "Bible Story Images", frequency: "Monthly", quantity: 18, disabled: false },
+  { key: 2, plan: "VBSify", frequency: "Quarterly", quantity: 16, disabled: true },
+  { key: 3, plan: "Weekly Curriculum", frequency: "Weekly", quantity: 15, disabled: false },
+  { key: 4, plan: "Big Burrito", frequency: "Monthly", quantity: 13, disabled: true },
+  { key: 5, plan: "Whole Enchilada", frequency: "Yearly", quantity: 12, disabled: false },
+];
+
+const paddingXS = 8;
+
+export default function Top5SellingSubscriptionPlans() {
+  const [period, setPeriod] = useState("12months");
+  const [rowH, setRowH] = useState(60);
+  const [freqW, setFreqW] = useState(100);
+  const [qtyW, setQtyW] = useState(80);
+
+  useEffect(() => {
+    const update = () => {
+      const w = window.innerWidth;
+      if (w < 640) {
+        setRowH(44); setFreqW(70); setQtyW(56);
+      } else if (w < 1024) {
+        setRowH(52); setFreqW(84); setQtyW(68);
+      } else {
+        setRowH(60); setFreqW(100); setQtyW(80);
+      }
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  return (
+    <div style={{
+      flex: 1, minWidth: 0,
+      borderRadius: 12, border: "1px solid #E5E7EB",
+      padding: 20, background: "#fff",
+      boxSizing: "border-box",
+      display: "flex", flexDirection: "column", gap: 16,
+    }}>
+
+      {/* Header */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0, flexWrap: "wrap", gap: 8 }}>
+        <span style={{ fontSize: 16, fontWeight: 600, color: "#111827" }}>
+          Top 5 Selling Subscription Plans
+        </span>
+        <Select
+          value={period} onChange={setPeriod} size="small"
+          suffixIcon={<DownOutlined style={{ fontSize: 12, color: "#374151" }} />}
+          style={{ width: 140, height: 32 }}
+          className="bg-gray-100"
+          options={[
+            { value: "12months", label: "Last 12 months" },
+            { value: "6months", label: "Last 6 months" },
+            { value: "3months", label: "Last 3 months" },
+          ]}
+        />
+      </div>
+
+      {/* Column Headers */}
+      <div style={{ display: "flex", alignItems: "center", borderBottom: "1px solid #E5E7EB", paddingBottom: 8, flexShrink: 0 }}>
+        <div style={{ flex: 1, fontSize: 12, fontWeight: 600, color: "#111827" }}>Plan</div>
+        <div style={{
+          width: freqW, fontSize: 12, fontWeight: 600, color: "#111827",
+          borderRight: "0.5px solid #E5E7EB",
+          paddingLeft: paddingXS, paddingRight: paddingXS,
+          textAlign: "right", flexShrink: 0,
+        }}>Frequency</div>
+        <div style={{
+          width: qtyW, fontSize: 12, fontWeight: 600, color: "#111827",
+          paddingRight: paddingXS, textAlign: "right", flexShrink: 0,
+        }}>Quantity</div>
+      </div>
+
+      {/* Rows */}
+      <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+        {plans.map((item) => (
+          <div
+            key={item.key}
+            style={{
+              display: "flex", alignItems: "center",
+              borderBottom: "0.5px solid #F3F4F6",
+              background: item.disabled ? "rgba(0, 0, 0, 0.02)" : "transparent",
+            }}
+          >
+            {/* Plan name */}
+            <div style={{
+              flex: 1, height: rowH,
+              display: "flex", alignItems: "center",
+              paddingTop: paddingXS, paddingBottom: paddingXS,
+              minWidth: 0,
+            }}>
+              <span style={{ fontSize: 13, color: "#111827", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                {item.plan}
+              </span>
+            </div>
+
+            {/* Frequency */}
+            <div style={{
+              width: freqW, height: rowH,
+              display: "flex", alignItems: "center", justifyContent: "flex-end",
+              fontSize: 13, fontWeight: 500, color: "#111827",
+              borderRight: "0.5px solid #E5E7EB",
+              paddingLeft: paddingXS, paddingRight: paddingXS,
+              flexShrink: 0,
+            }}>
+              {item.frequency}
+            </div>
+
+            {/* Quantity */}
+            <div style={{
+              width: qtyW, height: rowH,
+              display: "flex", alignItems: "center", justifyContent: "flex-end",
+              fontSize: 13, color: "#111827",
+              borderTop: "1px solid #F3F4F6", borderBottom: "1px solid #F3F4F6",
+              paddingRight: paddingXS, flexShrink: 0,
+            }}>
+              {item.quantity}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
