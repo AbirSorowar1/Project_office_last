@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Menu, Input, Avatar, Tooltip } from "antd";
-import {
-  AppstoreOutlined, CreditCardOutlined, ShoppingOutlined,
-  InboxOutlined, BookOutlined, StarOutlined, ReadOutlined,
-  UserOutlined, ContainerOutlined, TagOutlined,
-  BarChartOutlined, SettingOutlined, SearchOutlined,
-} from "@ant-design/icons";
+import { AppstoreOutlined, SearchOutlined } from "@ant-design/icons";
 import Logo from "./Logo.png";
 import DockIcon from "./dock_to_right.png";
 
@@ -22,45 +17,58 @@ const groupLabel = (text) => (
   <span className="text-xs font-semibold text-gray-400 tracking-widest uppercase">{text}</span>
 );
 
+// ── Corrected imports (images are in src/components/) ──
+import SubscriptionsImg from "./components/Subscriptions.png";
+import OrdersImg from "./components/Orders.png";
+import ProductsImg from "./components/Products.png";
+import BibleStoriesImg from "./components/BibleStories.png";
+import VBSifySeriesImg from "./components/VBSifySeries.png";
+import TeacherHandbooksImg from "./components/TeacherHandbooks.png";
+import CustomersImg from "./components/Customers.png";
+import SubscriptionPlansImg from "./components/SubscriptionPlans.png";
+import PromotionsImg from "./components/Promotions.png";
+import ReportsImg from "./components/Reports.png";
+import SettingsImg from "./components/settings.png";
+
+// Collapsed mode — Dashboard uses icon, others use images
+const collapsedItems = [
+  { key: "dashboard", icon: <Tooltip title="Dashboard" placement="right"><AppstoreOutlined className="text-base" /></Tooltip> },
+  { key: "subscriptions", icon: <Tooltip title="Subscriptions" placement="right"><img src={SubscriptionsImg} alt="Subscriptions" className="w-5 h-5 object-contain" /></Tooltip> },
+  { key: "orders", icon: <Tooltip title="Orders" placement="right"><img src={OrdersImg} alt="Orders" className="w-5 h-5 object-contain" /></Tooltip> },
+  { key: "products", icon: <Tooltip title="Products" placement="right"><img src={ProductsImg} alt="Products" className="w-5 h-5 object-contain" /></Tooltip> },
+  { key: "bible-stories", icon: <Tooltip title="Bible Stories" placement="right"><img src={BibleStoriesImg} alt="Bible Stories" className="w-5 h-5 object-contain" /></Tooltip> },
+  { key: "vbsify", icon: <Tooltip title="VBSify Series" placement="right"><img src={VBSifySeriesImg} alt="VBSify Series" className="w-5 h-5 object-contain" /></Tooltip> },
+  { key: "handbooks", icon: <Tooltip title="Teacher Handbooks" placement="right"><img src={TeacherHandbooksImg} alt="Teacher Handbooks" className="w-5 h-5 object-contain" /></Tooltip> },
+  { key: "customers", icon: <Tooltip title="Customers" placement="right"><img src={CustomersImg} alt="Customers" className="w-5 h-5 object-contain" /></Tooltip> },
+  { key: "subscription-plans", icon: <Tooltip title="Subscription Plans" placement="right"><img src={SubscriptionPlansImg} alt="Subscription Plans" className="w-5 h-5 object-contain" /></Tooltip> },
+  { key: "promotions", icon: <Tooltip title="Promotions" placement="right"><img src={PromotionsImg} alt="Promotions" className="w-5 h-5 object-contain" /></Tooltip> },
+  { key: "reports", icon: <Tooltip title="Reports" placement="right"><img src={ReportsImg} alt="Reports" className="w-5 h-5 object-contain" /></Tooltip> },
+  { key: "settings", icon: <Tooltip title="Settings" placement="right"><img src={SettingsImg} alt="Settings" className="w-5 h-5 object-contain" /></Tooltip> },
+];
+
 const menuItems = [
   {
     key: "main-group", type: "group", label: groupLabel("Main"),
     children: [
       { key: "dashboard", icon: <AppstoreOutlined />, label: navLabel("Dashboard") },
-      { key: "subscriptions", icon: <CreditCardOutlined />, label: navLabel("Subscriptions"), children: [{ key: "sub-active", label: "Active" }, { key: "sub-cancelled", label: "Cancelled" }] },
-      { key: "orders", icon: <ShoppingOutlined />, label: navLabel("Orders"), children: [{ key: "orders-all", label: "All Orders" }, { key: "orders-pending", label: "Pending" }] },
-      { key: "products", icon: <InboxOutlined />, label: navLabel("Products"), children: [{ key: "products-all", label: "All Products" }, { key: "products-add", label: "Add Product" }] },
-      { key: "bible-stories", icon: <BookOutlined />, label: navLabel("Bible Stories"), children: [{ key: "bible-all", label: "All Stories" }] },
-      { key: "vbsify", icon: <StarOutlined />, label: navLabel("VBSify Series"), children: [{ key: "vbs-all", label: "All Series" }] },
-      { key: "handbooks", icon: <ReadOutlined />, label: navLabel("Teacher Handbooks"), children: [{ key: "handbook-all", label: "All Handbooks" }] },
-      { key: "customers", icon: <UserOutlined />, label: navLabel("Customers"), children: [{ key: "customers-all", label: "All Customers" }] },
-      { key: "subscription-plans", icon: <ContainerOutlined />, label: navLabel("Subscription Plans"), children: [{ key: "plans-all", label: "All Plans" }] },
-      { key: "promotions", icon: <TagOutlined />, label: navLabel("Promotions"), children: [{ key: "promo-all", label: "All Promotions" }] },
+      { key: "subscriptions", icon: <img src={SubscriptionsImg} alt="Subscriptions" className="w-5 h-5 object-contain" />, label: navLabel("Subscriptions"), children: [{ key: "sub-active", label: "Active" }, { key: "sub-cancelled", label: "Cancelled" }] },
+      { key: "orders", icon: <img src={OrdersImg} alt="Orders" className="w-5 h-5 object-contain" />, label: navLabel("Orders"), children: [{ key: "orders-all", label: "All Orders" }, { key: "orders-pending", label: "Pending" }] },
+      { key: "products", icon: <img src={ProductsImg} alt="Products" className="w-5 h-5 object-contain" />, label: navLabel("Products"), children: [{ key: "products-all", label: "All Products" }, { key: "products-add", label: "Add Product" }] },
+      { key: "bible-stories", icon: <img src={BibleStoriesImg} alt="Bible Stories" className="w-5 h-5 object-contain" />, label: navLabel("Bible Stories"), children: [{ key: "bible-all", label: "All Stories" }] },
+      { key: "vbsify", icon: <img src={VBSifySeriesImg} alt="VBSify Series" className="w-5 h-5 object-contain" />, label: navLabel("VBSify Series"), children: [{ key: "vbs-all", label: "All Series" }] },
+      { key: "handbooks", icon: <img src={TeacherHandbooksImg} alt="Teacher Handbooks" className="w-5 h-5 object-contain" />, label: navLabel("Teacher Handbooks"), children: [{ key: "handbook-all", label: "All Handbooks" }] },
+      { key: "customers", icon: <img src={CustomersImg} alt="Customers" className="w-5 h-5 object-contain" />, label: navLabel("Customers"), children: [{ key: "customers-all", label: "All Customers" }] },
+      { key: "subscription-plans", icon: <img src={SubscriptionPlansImg} alt="Subscription Plans" className="w-5 h-5 object-contain" />, label: navLabel("Subscription Plans"), children: [{ key: "plans-all", label: "All Plans" }] },
+      { key: "promotions", icon: <img src={PromotionsImg} alt="Promotions" className="w-5 h-5 object-contain" />, label: navLabel("Promotions"), children: [{ key: "promo-all", label: "All Promotions" }] },
     ],
   },
   {
     key: "essentials-group", type: "group", label: groupLabel("Essentials"),
     children: [
-      { key: "reports", icon: <BarChartOutlined />, label: navLabel("Reports"), children: [{ key: "reports-sales", label: "Sales" }, { key: "reports-orders", label: "Orders" }] },
-      { key: "settings", icon: <SettingOutlined />, label: navLabel("Settings"), children: [{ key: "settings-general", label: "General" }, { key: "settings-account", label: "Account" }] },
+      { key: "reports", icon: <img src={ReportsImg} alt="Reports" className="w-5 h-5 object-contain" />, label: navLabel("Reports"), children: [{ key: "reports-sales", label: "Sales" }, { key: "reports-orders", label: "Orders" }] },
+      { key: "settings", icon: <img src={SettingsImg} alt="Settings" className="w-5 h-5 object-contain" />, label: navLabel("Settings"), children: [{ key: "settings-general", label: "General" }, { key: "settings-account", label: "Account" }] },
     ],
   },
-];
-
-// Collapsed menu — only icons with tooltip
-const collapsedItems = [
-  { key: "dashboard", icon: <Tooltip title="Dashboard" placement="right"><AppstoreOutlined className="text-base" /></Tooltip> },
-  { key: "subscriptions", icon: <Tooltip title="Subscriptions" placement="right"><CreditCardOutlined className="text-base" /></Tooltip> },
-  { key: "orders", icon: <Tooltip title="Orders" placement="right"><ShoppingOutlined className="text-base" /></Tooltip> },
-  { key: "products", icon: <Tooltip title="Products" placement="right"><InboxOutlined className="text-base" /></Tooltip> },
-  { key: "bible-stories", icon: <Tooltip title="Bible Stories" placement="right"><BookOutlined className="text-base" /></Tooltip> },
-  { key: "vbsify", icon: <Tooltip title="VBSify Series" placement="right"><StarOutlined className="text-base" /></Tooltip> },
-  { key: "handbooks", icon: <Tooltip title="Teacher Handbooks" placement="right"><ReadOutlined className="text-base" /></Tooltip> },
-  { key: "customers", icon: <Tooltip title="Customers" placement="right"><UserOutlined className="text-base" /></Tooltip> },
-  { key: "subscription-plans", icon: <Tooltip title="Subscription Plans" placement="right"><ContainerOutlined className="text-base" /></Tooltip> },
-  { key: "promotions", icon: <Tooltip title="Promotions" placement="right"><TagOutlined className="text-base" /></Tooltip> },
-  { key: "reports", icon: <Tooltip title="Reports" placement="right"><BarChartOutlined className="text-base" /></Tooltip> },
-  { key: "settings", icon: <Tooltip title="Settings" placement="right"><SettingOutlined className="text-base" /></Tooltip> },
 ];
 
 export default function Sidebar() {
@@ -76,7 +84,7 @@ export default function Sidebar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // ── COLLAPSED (icon-only, width 72px) ──
+  // ── COLLAPSED (icon/image-only, width 72px) ──
   if (collapsed) {
     return (
       <div
@@ -89,7 +97,7 @@ export default function Sidebar() {
             <img src={Logo} alt="Logo" className="object-contain" style={{ width: 32, height: 32 }} />
           </div>
 
-          {/* Icon-only menu */}
+          {/* Icon/image-only menu */}
           <Menu
             mode="inline"
             inlineCollapsed={true}
@@ -102,8 +110,8 @@ export default function Sidebar() {
 
         {/* User avatar only */}
         <div className="flex justify-center pb-2">
-          <Tooltip title="Arghyafra/Nilay — Manager" placement="right">
-            <Avatar size={32} style={{ backgroundColor: "#4F46E5", fontWeight: 700, fontSize: 11, cursor: "pointer" }}>
+          <Tooltip title="ArghyaRaj Niloy — Manager" placement="right">
+            <Avatar size={32} style={{ backgroundColor: "#9CA3AF", fontWeight: 700, fontSize: 11, cursor: "pointer" }}>
               AN
             </Avatar>
           </Tooltip>
@@ -150,10 +158,10 @@ export default function Sidebar() {
       </div>
 
       {/* User */}
-      <div className="flex items-center gap-2.5 p-3 rounded-xl bg-gray-50">
-        <Avatar size={32} className="shrink-0 font-bold text-xs" style={{ backgroundColor: "#4F46E5" }}>AN</Avatar>
+      <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white">
+        <Avatar size={32} className="shrink-0 font-bold text-xs" style={{ backgroundColor: "#9CA3AF" }}>AN</Avatar>
         <div>
-          <p className="m-0 text-sm font-semibold text-gray-900 leading-tight">Arghyafra/Nilay</p>
+          <p className="m-0 text-sm font-semibold text-gray-900 leading-tight" style={{ marginTop: 8 }}>ArghyaRaj Niloy</p>
           <p className="m-0 text-xs text-gray-400">Manager</p>
         </div>
       </div>

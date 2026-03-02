@@ -3,51 +3,53 @@ import ReactApexChart from "react-apexcharts";
 
 export default function TotalSalesChart() {
   const options = {
-    chart: { type: "area", toolbar: { show: false } },
-    dataLabels: { enabled: false },
-    stroke: { curve: "smooth", width: 2, colors: ["#4F46E5"] },
-    fill: {
-      type: "gradient",
-      gradient: {
-        shadeIntensity: 1,
-        colorStops: [
-          { offset: 0, color: "#4F46E5", opacity: 0.3 },
-          { offset: 100, color: "#4F46E5", opacity: 0.02 },
-        ],
-      },
-    },
+    chart: { type: "line", toolbar: { show: false } },
+    stroke: { curve: "smooth", width: [2, 3], dashArray: [5, 0] },
+    colors: ["#a5c8ed", "#1a73e8"],
     xaxis: {
       categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
       axisBorder: { show: false }, axisTicks: { show: false },
       labels: { style: { colors: "#9CA3AF", fontSize: "11px" } },
     },
     yaxis: {
+      min: 4000, max: 10000, tickAmount: 3,
       labels: {
         style: { colors: "#9CA3AF", fontSize: "11px" },
-        formatter: (val) => `$${(val / 1000).toFixed(0)}k`,
+        formatter: (val) => `$${val.toLocaleString()}`,
       },
     },
-    grid: { borderColor: "#F3F4F6", strokeDashArray: 4 },
+    grid: { borderColor: "#eee" },
+    legend: { show: false },
+    dataLabels: { enabled: false },
     tooltip: { y: { formatter: (val) => `$${val.toLocaleString()}` } },
-    colors: ["#4F46E5"],
   };
 
-  const series = [{ name: "Total Sales", data: [42000, 55000, 48000, 70000, 62000, 90000] }];
+  const series = [
+    { name: "2024", data: [6000, 6000, 6000, 6000, 5000, 4000] },
+    { name: "2025", data: [4000, 4000, 4000, 4000, 6000, 10000] },
+  ];
 
   return (
-    <div className="flex-1 min-w-0 bg-white border border-gray-200 rounded-xl p-5">
-      <div className="flex justify-between items-start mb-1">
-        <p className="m-0 text-sm text-gray-500">Total Sales</p>
-        <p className="m-0 text-xl font-bold text-gray-900">$756K</p>
+    <div className="flex-1 min-w-0 bg-white border border-gray-200 rounded-xl flex flex-col box-border p-6 overflow-hidden" style={{ height: "clamp(260px, 27vw, 400px)" }}>
+      {/* Header */}
+      <div className="flex justify-between items-center mb-2">
+        <h2 className="m-0 font-bold text-gray-900" style={{ fontSize: "clamp(11px, 0.78vw, 15px)" }}>Total Sales</h2>
+        <span className="font-bold text-gray-900" style={{ fontSize: "clamp(11px, 0.78vw, 15px)" }}>$756K</span>
       </div>
-      <ReactApexChart options={options} series={series} type="area" height={160} />
-      <div className="flex gap-4 justify-center mt-1">
-        <span className="text-xs text-gray-500 flex items-center gap-1">
-          <span className="inline-block rounded-sm" style={{ width: 20, height: 2, background: "#4F46E5" }} />
+
+      {/* Chart */}
+      <div className="flex-1 min-h-0">
+        <ReactApexChart options={options} series={series} type="line" height="100%" />
+      </div>
+
+      {/* Legend */}
+      <div className="flex gap-4 justify-center mt-2">
+        <span className="flex items-center gap-1.5 font-bold text-gray-700" style={{ fontSize: 11 }}>
+          <span className="inline-block rounded-sm" style={{ width: 20, height: 2, background: "#1a73e8" }} />
           Jan–Jun, 2025
         </span>
-        <span className="text-xs text-gray-300 flex items-center gap-1">
-          <span className="inline-block rounded-sm" style={{ width: 20, height: 2, background: "#D1D5DB" }} />
+        <span className="flex items-center gap-1.5 text-gray-400" style={{ fontSize: 11 }}>
+          <span className="inline-block rounded-sm" style={{ width: 20, height: 2, background: "#a5c8ed" }} />
           Jan–Dec, 2024
         </span>
       </div>
