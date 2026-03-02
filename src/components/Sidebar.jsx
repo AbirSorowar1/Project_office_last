@@ -1,12 +1,27 @@
 import React, { useState } from "react";
 import { Menu, Input, Avatar, Drawer, Button } from "antd";
 import {
-  AppstoreOutlined, CreditCardOutlined, ShoppingOutlined,
-  InboxOutlined, BookOutlined, StarOutlined, ReadOutlined,
-  UserOutlined, ContainerOutlined, TagOutlined,
-  BarChartOutlined, SettingOutlined, SearchOutlined, MenuOutlined,
+  AppstoreOutlined,        // we'll keep this one as there is no replacement
+  SearchOutlined,
+  MenuOutlined,
 } from "@ant-design/icons";
 import Logo from "./Logo.png";
+
+// ────────────────────────────────────────────────
+//  Custom image imports (adjust paths if needed in your real project)
+// ────────────────────────────────────────────────
+import imgDashboard from "./icon/Dashboard.png";           // assuming you have one — if not keep AppstoreOutlined
+import imgSubscriptions from "./icon/Subscriptions.png";
+import imgOrders from "./icon/Orders.png";
+import imgProducts from "./icon/Products.png";
+import imgBibleStories from "./icon/Bible Stories.png";
+import imgVBSify from "./icon/VBSify Series.png";
+import imgTeacherHandbooks from "./icon/Teacher Handbooks.png";
+import imgCustomers from "./icon/Customers.png";
+import imgSubscriptionPlans from "./icon/Subscription Plans.png";
+import imgPromotions from "./icon/Promotions.png";
+import imgReports from "./icon/Reports.png";
+import imgSettings from "./icon/settings.png";
 
 const navLabel = (text) => (
   <span className="inline-block overflow-hidden whitespace-nowrap text-ellipsis" style={{ width: 130, height: 22, lineHeight: "22px" }}>
@@ -22,23 +37,82 @@ const menuItems = [
   {
     key: "main-group", type: "group", label: groupLabel("Main"),
     children: [
-      { key: "dashboard",          icon: <AppstoreOutlined className="text-base" />,   label: navLabel("Dashboard") },
-      { key: "subscriptions",      icon: <CreditCardOutlined className="text-base" />,  label: navLabel("Subscriptions"),     children: [{ key: "sub-active", label: "Active" }, { key: "sub-cancelled", label: "Cancelled" }] },
-      { key: "orders",             icon: <ShoppingOutlined className="text-base" />,    label: navLabel("Orders"),            children: [{ key: "orders-all", label: "All Orders" }, { key: "orders-pending", label: "Pending" }] },
-      { key: "products",           icon: <InboxOutlined className="text-base" />,       label: navLabel("Products"),          children: [{ key: "products-all", label: "All Products" }, { key: "products-add", label: "Add Product" }] },
-      { key: "bible-stories",      icon: <BookOutlined className="text-base" />,        label: navLabel("Bible Stories"),     children: [{ key: "bible-all", label: "All Stories" }] },
-      { key: "vbsify",             icon: <StarOutlined className="text-base" />,        label: navLabel("VBSify Series"),     children: [{ key: "vbs-all", label: "All Series" }] },
-      { key: "handbooks",          icon: <ReadOutlined className="text-base" />,        label: navLabel("Teacher Handbooks"), children: [{ key: "handbook-all", label: "All Handbooks" }] },
-      { key: "customers",          icon: <UserOutlined className="text-base" />,        label: navLabel("Customers"),         children: [{ key: "customers-all", label: "All Customers" }] },
-      { key: "subscription-plans", icon: <ContainerOutlined className="text-base" />,   label: navLabel("Subscription Plans"),children: [{ key: "plans-all", label: "All Plans" }] },
-      { key: "promotions",         icon: <TagOutlined className="text-base" />,         label: navLabel("Promotions"),        children: [{ key: "promo-all", label: "All Promotions" }] },
+      {
+        key: "dashboard",
+        icon: <AppstoreOutlined className="text-base" />,   // ← kept original (no image provided)
+        label: navLabel("Dashboard")
+      },
+      {
+        key: "subscriptions",
+        icon: <img src={imgSubscriptions} alt="" className="w-5 h-5 object-contain" />,
+        label: navLabel("Subscriptions"),
+        children: [{ key: "sub-active", label: "Active" }, { key: "sub-cancelled", label: "Cancelled" }]
+      },
+      {
+        key: "orders",
+        icon: <img src={imgOrders} alt="" className="w-5 h-5 object-contain" />,
+        label: navLabel("Orders"),
+        children: [{ key: "orders-all", label: "All Orders" }, { key: "orders-pending", label: "Pending" }]
+      },
+      {
+        key: "products",
+        icon: <img src={imgProducts} alt="" className="w-5 h-5 object-contain" />,
+        label: navLabel("Products"),
+        children: [{ key: "products-all", label: "All Products" }, { key: "products-add", label: "Add Product" }]
+      },
+      {
+        key: "bible-stories",
+        icon: <img src={imgBibleStories} alt="" className="w-5 h-5 object-contain" />,
+        label: navLabel("Bible Stories"),
+        children: [{ key: "bible-all", label: "All Stories" }]
+      },
+      {
+        key: "vbsify",
+        icon: <img src={imgVBSify} alt="" className="w-5 h-5 object-contain" />,
+        label: navLabel("VBSify Series"),
+        children: [{ key: "vbs-all", label: "All Series" }]
+      },
+      {
+        key: "handbooks",
+        icon: <img src={imgTeacherHandbooks} alt="" className="w-5 h-5 object-contain" />,
+        label: navLabel("Teacher Handbooks"),
+        children: [{ key: "handbook-all", label: "All Handbooks" }]
+      },
+      {
+        key: "customers",
+        icon: <img src={imgCustomers} alt="" className="w-5 h-5 object-contain" />,
+        label: navLabel("Customers"),
+        children: [{ key: "customers-all", label: "All Customers" }]
+      },
+      {
+        key: "subscription-plans",
+        icon: <img src={imgSubscriptionPlans} alt="" className="w-5 h-5 object-contain" />,
+        label: navLabel("Subscription Plans"),
+        children: [{ key: "plans-all", label: "All Plans" }]
+      },
+      {
+        key: "promotions",
+        icon: <img src={imgPromotions} alt="" className="w-5 h-5 object-contain" />,
+        label: navLabel("Promotions"),
+        children: [{ key: "promo-all", label: "All Promotions" }]
+      },
     ],
   },
   {
     key: "essentials-group", type: "group", label: groupLabel("Essentials"),
     children: [
-      { key: "reports",  icon: <BarChartOutlined className="text-base" />,  label: navLabel("Reports"),  children: [{ key: "reports-sales", label: "Sales" }, { key: "reports-orders", label: "Orders" }] },
-      { key: "settings", icon: <SettingOutlined className="text-base" />,   label: navLabel("Settings"), children: [{ key: "settings-general", label: "General" }, { key: "settings-account", label: "Account" }] },
+      {
+        key: "reports",
+        icon: <img src={imgReports} alt="" className="w-5 h-5 object-contain" />,
+        label: navLabel("Reports"),
+        children: [{ key: "reports-sales", label: "Sales" }, { key: "reports-orders", label: "Orders" }]
+      },
+      {
+        key: "settings",
+        icon: <img src={imgSettings} alt="" className="w-5 h-5 object-contain" />,
+        label: navLabel("Settings"),
+        children: [{ key: "settings-general", label: "General" }, { key: "settings-account", label: "Account" }]
+      },
     ],
   },
 ];
