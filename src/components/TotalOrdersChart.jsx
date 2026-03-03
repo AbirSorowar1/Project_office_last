@@ -40,14 +40,18 @@ export default function TotalOrdersChart() {
       {/* Header */}
       <div className="flex justify-between items-center mb-2">
         <h2
-          className="m-0 font-bold text-black"
-          style={{ fontSize: "clamp(11px, 0.78vw, 15px)" }}
+          className="m-0 font-bold"
+          style={{
+            fontSize: "clamp(13px, 0.9vw, 16px)",
+            color: "#111827",
+            fontWeight: 700,
+          }}
         >
           Total Orders
         </h2>
         <span
           className="font-bold text-gray-900"
-          style={{ fontSize: "clamp(11px, 0.78vw, 15px)" }}
+          style={{ fontSize: "clamp(13px, 0.78vw, 16px)" }}
         >
           9836
         </span>

@@ -110,7 +110,7 @@ export default function StoreOrdersVsSubscriptions() {
     },
 
     grid: {
-      borderColor: "#F3F4F6",
+      borderColor: "#D1D5DB", // darker than F3F4F6
       strokeDashArray: 4,
       xaxis: { lines: { show: false } },
       yaxis: { lines: { show: true } },
@@ -181,8 +181,8 @@ export default function StoreOrdersVsSubscriptions() {
         <p className="m-0 text-sm font-semibold text-gray-900">
           Store Orders vs Subscriptions
         </p>
-        <span className="text-xs text-indigo-500 cursor-pointer font-medium">
-          → Growth
+        <span className="flex items-center gap-1 text-xs text-black cursor-pointer font-medium">
+          ↗ Growth
         </span>
       </div>
 

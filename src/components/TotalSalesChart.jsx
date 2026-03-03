@@ -40,8 +40,12 @@ export default function TotalSalesChart() {
       {/* Header */}
       <div className="flex justify-between items-center mb-2">
         <h2
-          className="m-0 font-bold text-gray-900"
-          style={{ fontSize: "clamp(11px, 0.78vw, 15px)" }}
+          className="m-0 font-bold"
+          style={{
+            fontSize: "clamp(13px, 0.9vw, 16px)",
+            color: "#111827",
+            fontWeight: 700,
+          }}
         >
           Total Sales
         </h2>

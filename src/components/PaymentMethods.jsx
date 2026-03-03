@@ -49,14 +49,14 @@ export default function PaymentMethods() {
     >
       {/* Header */}
       <h2
-        className="m-0 mb-4 font-bold text-gray-900"
-        style={{ fontSize: "clamp(11px, 0.78vw, 15px)" }}
+        className="m-0 mb-4 font-bold"
+        style={{ fontSize: "clamp(12px, 0.85vw, 15px)", color: "#111827" }}
       >
         Payment Methods
       </h2>
 
       {/* SVG Stacked Bar */}
-      <div className="shrink-0 w-full">
+      <div className="shrink-0 w-full mt-6"> {/* 👈 pushed slightly down */}
         <svg
           width="100%"
           viewBox="0 0 400 80"
@@ -85,19 +85,21 @@ export default function PaymentMethods() {
               </pattern>
             ))}
           </defs>
+
           {segments.map((m) => (
-            <path key={m.patId} d={m.path} fill={`url(#${m.patId})`} />
+            <path key={m.patId} d={m.path} fill={`url(#${m.patId})`}>
+              {/* 👇 Hover tooltip */}
+              <title>{`${m.label}: ${m.percent}%`}</title>
+            </path>
           ))}
         </svg>
       </div>
 
       {/* Legend list */}
-      <div className="flex flex-col gap-3 mt-4 flex-1 justify-center">
+      <div className="flex flex-col gap-3 mt-6 flex-1 justify-center">
         {methods.map((m, i) => (
           <div key={i} className="flex justify-between items-center">
             <div className="flex items-center gap-2.5">
-
-              {/* ✅ SOLID COLOR BOX (updated) */}
               <svg width="16" height="16" style={{ flexShrink: 0, display: "block" }}>
                 <rect width="16" height="16" rx="4" fill={m.color} />
               </svg>
