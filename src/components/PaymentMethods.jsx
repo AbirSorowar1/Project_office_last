@@ -50,13 +50,13 @@ export default function PaymentMethods() {
       {/* Header */}
       <h2
         className="m-0 mb-4 font-bold"
-        style={{ fontSize: "clamp(12px, 0.85vw, 15px)", color: "#111827" }}
+        style={{ fontSize: "clamp(12px, 0.85vw, 15px)", color: "#111827", fontWeight: 700 }}
       >
         Payment Methods
       </h2>
 
       {/* SVG Stacked Bar */}
-      <div className="shrink-0 w-full mt-6"> {/* 👈 pushed slightly down */}
+      <div className="shrink-0 w-full mt-8">
         <svg
           width="100%"
           viewBox="0 0 400 80"
@@ -88,15 +88,14 @@ export default function PaymentMethods() {
 
           {segments.map((m) => (
             <path key={m.patId} d={m.path} fill={`url(#${m.patId})`}>
-              {/* 👇 Hover tooltip */}
-              <title>{`${m.label}: ${m.percent}%`}</title>
+              <title>{m.label} — {m.percent}%</title>
             </path>
           ))}
         </svg>
       </div>
 
       {/* Legend list */}
-      <div className="flex flex-col gap-3 mt-6 flex-1 justify-center">
+      <div className="flex flex-col gap-3 mt-4 flex-1 justify-center">
         {methods.map((m, i) => (
           <div key={i} className="flex justify-between items-center">
             <div className="flex items-center gap-2.5">
