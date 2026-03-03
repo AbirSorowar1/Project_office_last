@@ -54,9 +54,9 @@ export default function Top5SellingSubscriptionPlans() {
           style={{ width: 140, height: 32 }}
           className="bg-gray-100"
           options={[
-            { value: "12months", label: "Last 12 months" },
-            { value: "6months", label: "Last 6 months" },
-            { value: "3months", label: "Last 3 months" },
+            { value: "12months", label: <span style={{ color: "rgba(0, 0, 0, 0.48)" }}>Last 12 months</span> },
+            { value: "6months", label: <span style={{ color: "rgba(0, 0, 0, 0.48)" }}>Last 6 months</span> },
+            { value: "3months", label: <span style={{ color: "rgba(0, 0, 0, 0.48)" }}>Last 3 months</span> },
           ]}
         />
       </div>

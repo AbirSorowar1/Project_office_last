@@ -17,7 +17,7 @@ const groupLabel = (text) => (
   <span className="text-xs font-semibold text-gray-400 tracking-widest uppercase">{text}</span>
 );
 
-// ── Corrected imports (images are in src/components/) ──
+// ── Corrected imports ──
 import SubscriptionsImg from "./components/Subscriptions.png";
 import OrdersImg from "./components/Orders.png";
 import ProductsImg from "./components/Products.png";
@@ -30,7 +30,6 @@ import PromotionsImg from "./components/Promotions.png";
 import ReportsImg from "./components/Reports.png";
 import SettingsImg from "./components/settings.png";
 
-// Collapsed mode — Dashboard uses icon, others use images
 const collapsedItems = [
   { key: "dashboard", icon: <Tooltip title="Dashboard" placement="right"><AppstoreOutlined className="text-base" /></Tooltip> },
   { key: "subscriptions", icon: <Tooltip title="Subscriptions" placement="right"><img src={SubscriptionsImg} alt="Subscriptions" className="w-5 h-5 object-contain" /></Tooltip> },
@@ -75,7 +74,6 @@ export default function Sidebar() {
   const [selectedKeys, setSelectedKeys] = useState(["dashboard"]);
   const [collapsed, setCollapsed] = useState(window.innerWidth < COLLAPSE_BREAKPOINT);
 
-  // Auto collapse/expand on window resize
   useEffect(() => {
     const handleResize = () => {
       setCollapsed(window.innerWidth < COLLAPSE_BREAKPOINT);
@@ -84,7 +82,7 @@ export default function Sidebar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // ── COLLAPSED (icon/image-only, width 72px) ──
+  // ── COLLAPSED ──
   if (collapsed) {
     return (
       <div
@@ -92,12 +90,10 @@ export default function Sidebar() {
         style={{ width: 72, flexShrink: 0, transition: "width 0.2s ease" }}
       >
         <div>
-          {/* Logo icon only */}
           <div className="flex justify-center mb-5">
             <img src={Logo} alt="Logo" className="object-contain" style={{ width: 32, height: 32 }} />
           </div>
 
-          {/* Icon/image-only menu */}
           <Menu
             mode="inline"
             inlineCollapsed={true}
@@ -108,10 +104,12 @@ export default function Sidebar() {
           />
         </div>
 
-        {/* User avatar only */}
         <div className="flex justify-center pb-2">
           <Tooltip title="ArghyaRaj Niloy — Manager" placement="right">
-            <Avatar size={32} style={{ backgroundColor: "#9CA3AF", fontWeight: 700, fontSize: 11, cursor: "pointer" }}>
+            <Avatar
+              size={40}
+              className="bg-[#E5E7EB] text-[#4B5563] flex items-center justify-center font-bold border-none cursor-pointer"
+            >
               AN
             </Avatar>
           </Tooltip>
@@ -120,24 +118,22 @@ export default function Sidebar() {
     );
   }
 
-  // ── EXPANDED (full, width 280px) ──
+  // ── EXPANDED ──
   return (
     <div
       className="flex flex-col justify-between bg-white border-r border-gray-200 min-h-screen pt-4 pb-6 px-4 box-border"
       style={{ width: 280, flexShrink: 0, transition: "width 0.2s ease" }}
     >
       <div>
-        {/* Logo */}
         <div className="flex items-center justify-between mb-5 px-1.5">
           <img src={Logo} alt="Logo" className="object-contain" style={{ width: 48.37, height: 32 }} />
           <img
             src={DockIcon}
             alt="Dock"
-            style={{ width: 24, height: 24, opacity: 1, transform: "rotate(0deg)", cursor: "pointer" }}
+            style={{ width: 24, height: 24, opacity: 1, cursor: "pointer" }}
           />
         </div>
 
-        {/* Search */}
         <div className="mb-4">
           <Input
             prefix={<SearchOutlined className="text-gray-400" />}
@@ -146,7 +142,6 @@ export default function Sidebar() {
           />
         </div>
 
-        {/* Full Menu */}
         <Menu
           mode="inline"
           selectedKeys={selectedKeys}
@@ -157,12 +152,21 @@ export default function Sidebar() {
         />
       </div>
 
-      {/* User */}
-      <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white">
-        <Avatar size={32} className="shrink-0 font-bold text-xs" style={{ backgroundColor: "#9CA3AF" }}>AN</Avatar>
-        <div>
-          <p className="m-0 text-sm font-semibold text-gray-900 leading-tight" style={{ marginTop: 8 }}>ArghyaRaj Niloy</p>
-          <p className="m-0 text-xs text-gray-400">Manager</p>
+      {/* User Section - Updated to match Image Style */}
+      <div className="flex items-center gap-3 p-3 rounded-xl bg-white">
+        <Avatar
+          size={48}
+          className="bg-[#E5E7EB] text-[#4B5563] flex items-center justify-center font-bold text-sm border-none shrink-0"
+        >
+          AN
+        </Avatar>
+        <div className="flex flex-col">
+          <h2 className="text-[16px] font-bold text-[#1F2937] leading-tight m-0">
+            ArghyaRaj Niloy
+          </h2>
+          <p className="text-[14px] text-[#9CA3AF] font-normal m-0">
+            Manager
+          </p>
         </div>
       </div>
     </div>
