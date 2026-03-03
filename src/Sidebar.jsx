@@ -161,10 +161,10 @@ export default function Sidebar() {
           AN
         </Avatar>
         <div className="flex flex-col">
-          <h2 className="text-[16px] font-bold text-[#1F2937] leading-tight m-0">
+          <h2 className="text-[12px] font-bold text-[#1F2937] leading-tight m-0">
             ArghyaRaj Niloy
           </h2>
-          <p className="text-[14px] text-[#9CA3AF] font-normal m-0">
+          <p className="text-[12px] text-[#9CA3AF] font-normal m-0">
             Manager
           </p>
         </div>
