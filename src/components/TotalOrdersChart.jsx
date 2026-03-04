@@ -42,18 +42,29 @@ export default function TotalOrdersChart() {
         <h2
           className="m-0 font-bold"
           style={{
-            fontSize: "clamp(13px, 0.9vw, 16px)",
+            width: 103,            // fixed width for header text
+            height: 28,
+            fontSize: 16,          // smaller font to stay in line
+            lineHeight: "28px",
             color: "#111827",
             fontWeight: 700,
+            fontFamily: "'DM Sans', sans-serif",
           }}
         >
           Total Orders
         </h2>
         <span
           className="font-bold text-gray-900"
-          style={{ fontSize: "clamp(13px, 0.78vw, 16px)" }}
+          style={{
+            height: 28,
+            fontSize: 16,         // match header
+            lineHeight: "28px",
+            color: "#111827",
+            fontWeight: 700,
+            fontFamily: "'DM Sans', sans-serif",
+          }}
         >
-          9836
+          9,836
         </span>
       </div>
 

@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Select } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import React, { useState, useEffect, useRef } from "react";
 
 const plans = [
   { key: 1, plan: "Bible Story Images", frequency: "Monthly", quantity: 18, disabled: false },
@@ -11,6 +9,97 @@ const plans = [
 ];
 
 const paddingXS = 8;
+
+const selectOptions = [
+  { value: "12months", label: "Last 12 months" },
+  { value: "6months", label: "Last 6 months" },
+  { value: "3months", label: "Last 3 months" },
+];
+
+function CustomSelect({ value, onChange, options }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const selected = options.find((o) => o.value === value);
+
+  return (
+    <div ref={ref} style={{ position: "relative", width: 144, flexShrink: 0 }}>
+      <button
+        onClick={() => setOpen((p) => !p)}
+        style={{
+          width: "100%",
+          height: 32,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "0 10px",
+          border: "1px solid #E5E7EB",
+          borderRadius: 8,
+          background: "#F9FAFB",
+          cursor: "pointer",
+          fontSize: 13,
+          color: "rgba(0,0,0,0.48)",
+          boxSizing: "border-box",
+          gap: 6,
+        }}
+      >
+        <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+          {selected?.label}
+        </span>
+        <svg
+          width="12" height="12" viewBox="0 0 24 24" fill="none"
+          stroke="#374151" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+          style={{ flexShrink: 0, transform: open ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.15s" }}
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+
+      {open && (
+        <div style={{
+          position: "absolute",
+          top: "calc(100% + 4px)",
+          right: 0,
+          width: "100%",
+          background: "#fff",
+          border: "1px solid #E5E7EB",
+          borderRadius: 8,
+          boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+          zIndex: 100,
+          overflow: "hidden",
+        }}>
+          {options.map((opt) => (
+            <div
+              key={opt.value}
+              onClick={() => { onChange(opt.value); setOpen(false); }}
+              style={{
+                padding: "8px 12px",
+                fontSize: 13,
+                color: opt.value === value ? "#111827" : "rgba(0,0,0,0.48)",
+                fontWeight: opt.value === value ? 600 : 400,
+                background: opt.value === value ? "#F3F4F6" : "transparent",
+                cursor: "pointer",
+                transition: "background 0.1s",
+              }}
+              onMouseEnter={(e) => { if (opt.value !== value) e.currentTarget.style.background = "#F9FAFB"; }}
+              onMouseLeave={(e) => { if (opt.value !== value) e.currentTarget.style.background = "transparent"; }}
+            >
+              {opt.label}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Top5SellingSubscriptionPlans() {
   const [period, setPeriod] = useState("12months");
@@ -48,17 +137,7 @@ export default function Top5SellingSubscriptionPlans() {
         <span style={{ fontSize: 16, fontWeight: 600, color: "#111827" }}>
           Top 5 Selling Subscription Plans
         </span>
-        <Select
-          value={period} onChange={setPeriod} size="small"
-          suffixIcon={<DownOutlined style={{ fontSize: 12, color: "#374151" }} />}
-          style={{ width: 140, height: 32 }}
-          className="bg-gray-100"
-          options={[
-            { value: "12months", label: <span style={{ color: "rgba(0, 0, 0, 0.48)" }}>Last 12 months</span> },
-            { value: "6months", label: <span style={{ color: "rgba(0, 0, 0, 0.48)" }}>Last 6 months</span> },
-            { value: "3months", label: <span style={{ color: "rgba(0, 0, 0, 0.48)" }}>Last 3 months</span> },
-          ]}
-        />
+        <CustomSelect value={period} onChange={setPeriod} options={selectOptions} />
       </div>
 
       {/* Column Headers */}
@@ -66,7 +145,6 @@ export default function Top5SellingSubscriptionPlans() {
         <div style={{ flex: 1, fontSize: 12, fontWeight: 600, color: "#111827" }}>Plan</div>
         <div style={{
           width: freqW, fontSize: 12, fontWeight: 600, color: "#111827",
-          borderRight: "0.5px solid #E5E7EB",
           paddingLeft: paddingXS, paddingRight: paddingXS,
           textAlign: "right", flexShrink: 0,
         }}>Frequency</div>
@@ -104,7 +182,6 @@ export default function Top5SellingSubscriptionPlans() {
               width: freqW, height: rowH,
               display: "flex", alignItems: "center", justifyContent: "flex-end",
               fontSize: 13, fontWeight: 500, color: "#111827",
-              borderRight: "0.5px solid #E5E7EB",
               paddingLeft: paddingXS, paddingRight: paddingXS,
               flexShrink: 0,
             }}>

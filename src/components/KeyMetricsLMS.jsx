@@ -15,9 +15,23 @@ const metrics = [
 export default function KeyMetricsLMS() {
   return (
     <div style={{ marginBottom: "clamp(10px, 1vw, 24px)" }}>
-      <h2 style={{ fontSize: "clamp(11px, 0.78vw, 15px)", fontWeight: 600, color: "#111827", margin: "0 0 clamp(6px,0.7vw,14px)" }}>
+      {/* Updated heading */}
+      <h2
+        style={{
+          width: 194,          // fixed width
+          height: 28,          // fixed height
+          fontSize: 20,        // bigger font
+          fontWeight: 600,     // semi-bold
+          fontFamily: "'DM Sans', sans-serif",
+          color: "#111827",
+          lineHeight: "28px",
+          margin: "0 0 clamp(6px,0.7vw,14px)",
+        }}
+      >
         Key Metrics of LMS
       </h2>
+
+      {/* Metric cards */}
       <div style={{ display: "flex", gap: "clamp(6px, 0.75vw, 16px)", width: "100%" }}>
         {metrics.map((m, i) => <MetricCard key={i} {...m} />)}
       </div>

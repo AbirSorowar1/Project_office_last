@@ -12,39 +12,77 @@ import Top5SellingSubscriptionPlans from "./Top5SellingSubscriptionPlans";
 
 export default function Dashboard() {
   return (
-    <div className="flex-1 min-w-0 bg-gray-50 overflow-y-auto min-h-screen p-8 box-border max-lg:pt-16 max-lg:px-5 max-sm:px-3">
-
+    <div
+      style={{
+        // Spec: width=1160, left=280px, padding=32px, gap=48px
+        flex: 1,
+        minWidth: 0,
+        background: "#fff",
+        overflowY: "auto",
+        minHeight: "100vh",
+        padding: 32,               // padding: 32px all sides
+        boxSizing: "border-box",
+        display: "flex",
+        flexDirection: "column",
+        gap: 48,                   // gap: 48px between all top-level sections
+      }}
+    >
+      {/* ── Top Bar ── */}
       <TopBar />
+
+      {/* ── Date Filter ── */}
       <DateFilter />
-      <div className="mt-6">
-        <KeyMetricsStore />
-      </div>
+
+      {/* ── Key Metrics: Store ── */}
+      <KeyMetricsStore />
+
+      {/* ── Key Metrics: LMS ── */}
       <KeyMetricsLMS />
 
-      {/* Charts Row */}
-      <div className="flex gap-4 mb-6 max-lg:flex-col">
+      {/* ── Charts Row ── */}
+      <div
+        style={{
+          display: "flex",
+          gap: 16,
+          flexWrap: "wrap",
+        }}
+      >
         <TotalSalesChart />
         <TotalOrdersChart />
         <PaymentMethods />
       </div>
 
+      {/* ── Store Orders vs Subscriptions ── */}
       <StoreOrdersVsSubscriptions />
 
-      {/* Tables Row — responsive: side by side on large, stacked on small */}
-      <div className="flex gap-4 max-lg:flex-col">
+      {/* ── Tables Row ── */}
+      <div
+        style={{
+          display: "flex",
+          gap: 16,
+          flexWrap: "wrap",
+        }}
+      >
         <Top5SellingProducts />
         <Top5SellingSubscriptionPlans />
       </div>
 
-      {/* Responsive overrides for table column widths */}
+      {/* Responsive column width overrides */}
       <style>{`
         @media (max-width: 1400px) {
-          .col-price, .col-freq  { width: 80px !important; }
-          .col-qty               { width: 60px !important; }
+          .col-price, .col-freq { width: 80px !important; }
+          .col-qty              { width: 60px !important; }
         }
         @media (max-width: 1024px) {
-          .col-price, .col-freq  { width: 70px !important; }
-          .col-qty               { width: 55px !important; }
+          .col-price, .col-freq { width: 70px !important; }
+          .col-qty              { width: 55px !important; }
+        }
+        @media (max-width: 1280px) {
+          /* Stack charts and tables vertically below breakpoint */
+          .charts-row,
+          .tables-row {
+            flex-direction: column !important;
+          }
         }
       `}</style>
     </div>

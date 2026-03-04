@@ -26,20 +26,37 @@ export function MetricCard({ img, iconBg, title, value, change, changeLabel, pos
                         background: iconBg,
                     }}
                 >
-                    <img src={img} alt={title} className="object-contain" style={{ width: "56%", height: "56%" }} />
+                    <img
+                        src={img}
+                        alt={title}
+                        className="object-contain"
+                        style={{ width: "56%", height: "56%" }}
+                    />
                 </div>
 
                 {/* Title + Value */}
                 <div className="flex flex-col min-w-0 flex-1 overflow-hidden" style={{ gap: 1 }}>
                     <span
-                        className="block text-gray-500 truncate"
-                        style={{ fontSize: "clamp(9px, 0.62vw, 12px)", lineHeight: 1.4 }}
+                        className="block truncate"
+                        style={{
+                            fontFamily: "'DM Sans', sans-serif",
+                            fontWeight: 600,
+                            fontSize: 14,          // same as sidebar
+                            lineHeight: "22px",
+                            color: "rgba(0, 0, 0, 0.48)", // <-- updated color
+                        }}
                     >
                         {title}
                     </span>
                     <span
-                        className="block font-bold text-gray-900 truncate"
-                        style={{ fontSize: "clamp(11px, 1.1vw, 22px)", lineHeight: 1.3 }}
+                        className="block font-semibold truncate"
+                        style={{
+                            fontFamily: "'DM Sans', sans-serif",
+                            fontWeight: 600,
+                            fontSize: 14,          // same as sidebar
+                            lineHeight: "22px",
+                            color: "#111827",
+                        }}
                     >
                         {value}
                     </span>
@@ -49,25 +66,28 @@ export function MetricCard({ img, iconBg, title, value, change, changeLabel, pos
             {/* Bottom — change */}
             <div
                 className="flex items-center min-w-0 overflow-hidden shrink-0"
-                style={{ gap: "clamp(3px, 0.35vw, 8px)" }}
+                style={{ gap: "clamp(4px, 0.5vw, 10px)" }}
             >
                 <span
                     className="inline-flex items-center shrink-0 font-semibold whitespace-nowrap"
                     style={{
-                        gap: 2,
-                        fontSize: "clamp(8px, 0.58vw, 12px)",
+                        gap: 3,
+                        fontSize: "clamp(12px, 1vw, 20px)",
                         color: positive ? "#10B981" : "#EF4444",
                     }}
                 >
-                    {positive
-                        ? <ArrowUpOutlined style={{ fontSize: "clamp(6px, 0.45vw, 10px)" }} />
-                        : <ArrowDownOutlined style={{ fontSize: "clamp(6px, 0.45vw, 10px)" }} />}
+                    {positive ? (
+                        <ArrowUpOutlined style={{ fontSize: "clamp(10px, 0.8vw, 16px)" }} />
+                    ) : (
+                        <ArrowDownOutlined style={{ fontSize: "clamp(10px, 0.8vw, 16px)" }} />
+                    )}
                     {change}
                 </span>
+
                 {changeLabel && (
                     <span
                         className="text-gray-400 truncate"
-                        style={{ fontSize: "clamp(7px, 0.52vw, 11px)" }}
+                        style={{ fontSize: "clamp(11px, 0.9vw, 18px)" }}
                     >
                         {changeLabel}
                     </span>

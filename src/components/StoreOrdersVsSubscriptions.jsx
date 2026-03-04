@@ -73,49 +73,30 @@ export default function StoreOrdersVsSubscriptions() {
       },
     },
     dataLabels: { enabled: false },
-
-    fill: {
-      type: "solid",
-      opacity: 1,
-    },
-
+    fill: { type: "solid", opacity: 1 },
     colors: ["rgb(39,110,241)", "rgb(188,210,251)"],
     stroke: { show: false },
-
     xaxis: {
       categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
       axisBorder: { show: false },
       axisTicks: { show: false },
-      labels: {
-        style: {
-          colors: "#9CA3AF",
-          fontSize: "12px",
-          fontFamily: "inherit",
-        },
-      },
+      labels: { style: { colors: "#9CA3AF", fontSize: "12px", fontFamily: "inherit" } },
     },
-
     yaxis: {
       min: 0,
       max: 10000,
       tickAmount: 5,
       labels: {
-        style: {
-          colors: "#9CA3AF",
-          fontSize: "11px",
-          fontFamily: "inherit",
-        },
+        style: { colors: "#9CA3AF", fontSize: "11px", fontFamily: "inherit" },
         formatter: (val) => `$${(val / 1000).toFixed(0)}000`,
       },
     },
-
     grid: {
-      borderColor: "#D1D5DB", // darker than F3F4F6
+      borderColor: "#D1D5DB",
       strokeDashArray: 4,
       xaxis: { lines: { show: false } },
       yaxis: { lines: { show: true } },
     },
-
     legend: {
       show: true,
       position: "bottom",
@@ -127,7 +108,6 @@ export default function StoreOrdersVsSubscriptions() {
       fontFamily: "inherit",
       itemMargin: { horizontal: 16 },
     },
-
     tooltip: {
       shared: true,
       intersect: false,
@@ -162,14 +142,8 @@ export default function StoreOrdersVsSubscriptions() {
   };
 
   const series = [
-    {
-      name: "Subscriptions",
-      data: [7800, 8800, 3200, 4000, 8200, 7200],
-    },
-    {
-      name: "Orders",
-      data: [2800, 4200, 2200, 1800, 3200, 2600],
-    },
+    { name: "Subscriptions", data: [7800, 8800, 3200, 4000, 8200, 7200] },
+    { name: "Orders", data: [2800, 4200, 2200, 1800, 3200, 2600] },
   ];
 
   return (
@@ -178,7 +152,18 @@ export default function StoreOrdersVsSubscriptions() {
       style={{ padding: "20px 20px 8px 20px" }}
     >
       <div className="flex justify-between items-center mb-2">
-        <p className="m-0 text-sm font-semibold text-gray-900">
+        <p
+          className="m-0 font-semibold text-gray-900"
+          style={{
+            width: 288,
+            height: 28,
+            lineHeight: "28px",
+            fontSize: 16,
+            transform: "rotate(0deg)",
+            opacity: 1,
+            fontFamily: "'DM Sans', sans-serif",
+          }}
+        >
           Store Orders vs Subscriptions
         </p>
         <span className="flex items-center gap-1 text-xs text-black cursor-pointer font-medium">

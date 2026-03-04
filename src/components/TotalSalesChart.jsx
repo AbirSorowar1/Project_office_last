@@ -42,16 +42,27 @@ export default function TotalSalesChart() {
         <h2
           className="m-0 font-bold"
           style={{
-            fontSize: "clamp(13px, 0.9vw, 16px)",
+            width: 103,           // fixed width
+            height: 28,
+            fontSize: 16,         // chhoto kore dilam
             color: "#111827",
             fontWeight: 700,
+            lineHeight: "28px",
+            fontFamily: "'DM Sans', sans-serif",
           }}
         >
           Total Sales
         </h2>
         <span
           className="font-bold text-gray-900"
-          style={{ fontSize: "clamp(11px, 0.78vw, 15px)" }}
+          style={{
+            height: 28,
+            fontSize: 16,         // match h2
+            lineHeight: "28px",
+            color: "#111827",
+            fontWeight: 700,
+            fontFamily: "'DM Sans', sans-serif",
+          }}
         >
           $756K
         </span>

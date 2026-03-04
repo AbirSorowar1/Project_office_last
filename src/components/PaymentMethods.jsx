@@ -50,7 +50,13 @@ export default function PaymentMethods() {
       {/* Header */}
       <h2
         className="m-0 mb-4 font-bold"
-        style={{ fontSize: "clamp(12px, 0.85vw, 15px)", color: "#111827", fontWeight: 700 }}
+        style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 700,
+          fontSize: 16,
+          lineHeight: "28px",
+          color: "#111827",
+        }}
       >
         Payment Methods
       </h2>
@@ -102,12 +108,23 @@ export default function PaymentMethods() {
               <svg width="16" height="16" style={{ flexShrink: 0, display: "block" }}>
                 <rect width="16" height="16" rx="4" fill={m.color} />
               </svg>
-
-              <span className="text-sm font-semibold text-gray-700">
+              <span
+                className="text-sm font-semibold"
+                style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  color: "#4B5563",
+                }}
+              >
                 {m.label}
               </span>
             </div>
-            <span className="text-sm font-bold text-gray-900">
+            <span
+              className="text-sm font-bold"
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                color: "#111827",
+              }}
+            >
               {m.percent}%
             </span>
           </div>
