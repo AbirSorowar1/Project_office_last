@@ -1385,108 +1385,159 @@
         },
         "march": {
             "newOrders": {
-                "value": "214",
-                "change": "+22.3%",
+                "value": "79",
+                "change": "+5.3%",
                 "changeLabel": "vs Feb",
                 "positive": true
             },
             "totalRevenue": {
-                "value": "$158,900",
-                "change": "+25.8%",
+                "value": "$61,240",
+                "change": "+8.1%",
                 "changeLabel": "vs Feb",
                 "positive": true
             },
             "totalCompleted": {
-                "value": "189",
-                "change": "+22.7%",
+                "value": "68",
+                "change": "+4.6%",
                 "changeLabel": "vs Feb",
                 "positive": true
             },
             "totalOrders": {
-                "categories": [
-                    "W1",
-                    "W2",
-                    "W3",
-                    "W4"
-                ],
-                "current": [
-                    940,
-                    1040,
-                    1110,
-                    870
-                ],
-                "previous": [
-                    860,
-                    950,
-                    1020,
-                    800
-                ],
-                "totalLabel": "3,965"
+                "value": "147",
+                "change": "+6.5%",
+                "changeLabel": "vs Feb",
+                "positive": true
             },
             "newSubscriptions": {
-                "value": "447",
-                "change": "+18.3%",
+                "value": "163",
+                "change": "+5.8%",
                 "changeLabel": "vs Feb",
                 "positive": true
             },
             "subscriptionRevenue": {
-                "value": "$104K",
-                "change": "+16.9%",
+                "value": "$48K",
+                "change": "+7.2%",
                 "changeLabel": "vs Feb",
                 "positive": true
             },
             "activeSubscribers": {
-                "value": "7,389",
-                "change": "+4.1%",
+                "value": "8,319",
+                "change": "+4.3%",
                 "changeLabel": "vs Feb",
                 "positive": true
             },
             "averageMRR": {
-                "value": "$22K",
-                "change": "+1k",
+                "value": "$26K",
+                "change": "+0.8k",
                 "changeLabel": "vs Feb",
                 "positive": true
             },
             "storeVsSubs": {
                 "categories": [
-                    "W1",
-                    "W2",
-                    "W3",
-                    "W4"
+                    "Mar 1",
+                    "Mar 2",
+                    "Mar 3",
+                    "Mar 4",
+                    "Mar 5",
+                    "Mar 6",
+                    "Mar 7",
+                    "Mar 8",
+                    "Mar 9"
                 ],
                 "subscriptions": [
-                    1050,
                     1180,
-                    1240,
-                    1090
+                    1340,
+                    980,
+                    1420,
+                    1560,
+                    1100,
+                    1390,
+                    1470,
+                    1280
                 ],
                 "orders": [
-                    380,
-                    430,
-                    460,
-                    400
+                    420,
+                    490,
+                    360,
+                    530,
+                    580,
+                    400,
+                    510,
+                    540,
+                    470
                 ]
             },
             "totalSales": {
                 "categories": [
-                    "W1",
-                    "W2",
-                    "W3",
-                    "W4"
+                    "Mar 1",
+                    "Mar 2",
+                    "Mar 3",
+                    "Mar 4",
+                    "Mar 5",
+                    "Mar 6",
+                    "Mar 7",
+                    "Mar 8",
+                    "Mar 9"
                 ],
                 "current": [
-                    36000,
-                    40000,
-                    43000,
-                    33000
+                    6200,
+                    7100,
+                    5400,
+                    7800,
+                    8200,
+                    5900,
+                    7400,
+                    7900,
+                    6900
                 ],
                 "previous": [
-                    32000,
-                    36000,
-                    39000,
-                    30000
+                    5800,
+                    6600,
+                    5000,
+                    7200,
+                    7600,
+                    5500,
+                    6900,
+                    7300,
+                    6400
                 ],
-                "totalLabel": "$152K"
+                "totalLabel": "$61.2K"
+            },
+            "ordersChart": {
+                "categories": [
+                    "Mar 1",
+                    "Mar 2",
+                    "Mar 3",
+                    "Mar 4",
+                    "Mar 5",
+                    "Mar 6",
+                    "Mar 7",
+                    "Mar 8",
+                    "Mar 9"
+                ],
+                "current": [
+                    142,
+                    163,
+                    121,
+                    178,
+                    196,
+                    133,
+                    169,
+                    181,
+                    158
+                ],
+                "previous": [
+                    128,
+                    147,
+                    109,
+                    162,
+                    178,
+                    120,
+                    153,
+                    164,
+                    143
+                ],
+                "totalLabel": "1,441"
             },
             "paymentMethods": [
                 {
@@ -1496,7 +1547,7 @@
                 },
                 {
                     "label": "Mobile Wallet",
-                    "percent": 20,
+                    "percent": 21,
                     "color": "#818cf8"
                 },
                 {
@@ -1506,31 +1557,10 @@
                 },
                 {
                     "label": "Gift Card",
-                    "percent": 21,
+                    "percent": 20,
                     "color": "#ffb84d"
                 }
-            ],
-            "ordersChart": {
-                "categories": [
-                    "W1",
-                    "W2",
-                    "W3",
-                    "W4"
-                ],
-                "current": [
-                    940,
-                    1040,
-                    1110,
-                    870
-                ],
-                "previous": [
-                    860,
-                    950,
-                    1020,
-                    800
-                ],
-                "totalLabel": "3,965"
-            }
+            ]
         },
         "april": {
             "newOrders": {

@@ -169,14 +169,35 @@ export default function DateFilter({ onFilterChange }) {
       const monthLabel = MONTHS[MONTH_KEYS.indexOf(info.monthKey)] + " " + info.year;
       setSelected("custom");
       setLabel(monthLabel);
-      onFilterChange && onFilterChange(info.monthKey); // e.g. "january"
+      onFilterChange && onFilterChange(info.monthKey);
       setOpen(false);
     } else {
       const d = info.date;
-      const dateLabel = d.getDate() + " " + MONTHS[d.getMonth()] + " " + d.getFullYear();
-      setSelected("custom");
-      setLabel(dateLabel);
-      onFilterChange && onFilterChange("custom");
+      const now = new Date();
+      const isToday =
+        d.getDate() === now.getDate() &&
+        d.getMonth() === now.getMonth() &&
+        d.getFullYear() === now.getFullYear();
+      const isYesterday =
+        d.getDate() === now.getDate() - 1 &&
+        d.getMonth() === now.getMonth() &&
+        d.getFullYear() === now.getFullYear();
+
+      if (isToday) {
+        setSelected("today");
+        setLabel("Today");
+        onFilterChange && onFilterChange("today");
+      } else if (isYesterday) {
+        setSelected("yesterday");
+        setLabel("Yesterday");
+        onFilterChange && onFilterChange("yesterday");
+      } else {
+        const monthKey = MONTH_KEYS[d.getMonth()];
+        const monthLabel = MONTHS[d.getMonth()] + " " + d.getFullYear();
+        setSelected("custom");
+        setLabel(monthLabel);
+        onFilterChange && onFilterChange(monthKey);
+      }
       setOpen(false);
     }
   };
