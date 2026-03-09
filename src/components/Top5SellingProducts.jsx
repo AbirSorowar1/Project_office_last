@@ -1,12 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const products = [
-  { key: 1, product: "Creation Story – Genesis Curriculum", price: "$320", quantity: 18, disabled: false },
-  { key: 2, product: "Noah's Ark – Faith and Trust Curriculu...", price: "$275", quantity: 16, disabled: true },
-  { key: 3, product: "Story of Jonah – Obedience Curriculu...", price: "$310", quantity: 15, disabled: false },
-  { key: 4, product: "Birth of Jesus – The Gift of Love Curr...", price: "$289", quantity: 13, disabled: true },
-  { key: 5, product: "Story of Esther – Courage and Loyalty...", price: "$285", quantity: 12, disabled: false },
-];
+// Import the JSON data
+import jsonData from "../data.json";
 
 const selectOptions = [
   { value: "12months", label: "Last 12 months" },
@@ -117,6 +112,14 @@ const ImagePlaceholder = () => (
 
 export default function Top5SellingProducts() {
   const [period, setPeriod] = useState("12months");
+  const [products, setProducts] = useState([]);
+
+  // Load data from JSON file based on selected period
+  useEffect(() => {
+    // Get data for the selected period from JSON
+    const periodData = jsonData.topSellingProducts[period];
+    setProducts(periodData);
+  }, [period]); // Re-run when period changes
 
   return (
     <div className="flex-1 min-w-0 rounded-xl border border-gray-200 p-5 bg-white flex flex-col gap-4 box-border">
@@ -140,9 +143,9 @@ export default function Top5SellingProducts() {
         </div>
       </div>
 
-      {/* Rows */}
+      {/* Rows - Show only first 5 items */}
       <div className="flex flex-col flex-1">
-        {products.map((item) => (
+        {products.slice(0, 5).map((item) => (
           <div
             key={item.key}
             className={`flex items-center border-b border-gray-100 ${item.disabled ? "bg-black/[0.02]" : "bg-transparent"}`}

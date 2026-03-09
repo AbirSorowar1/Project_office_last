@@ -1,12 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const plans = [
-  { key: 1, plan: "Bible Story Images", frequency: "Monthly", quantity: 18, disabled: false },
-  { key: 2, plan: "VBSify", frequency: "Quarterly", quantity: 16, disabled: true },
-  { key: 3, plan: "Weekly Curriculum", frequency: "Weekly", quantity: 15, disabled: false },
-  { key: 4, plan: "Big Burrito", frequency: "Monthly", quantity: 13, disabled: true },
-  { key: 5, plan: "Whole Enchilada", frequency: "Yearly", quantity: 12, disabled: false },
-];
+// Import the JSON data
+import jsonData from "../data.json";
 
 const paddingXS = 8;
 
@@ -103,9 +98,17 @@ function CustomSelect({ value, onChange, options }) {
 
 export default function Top5SellingSubscriptionPlans() {
   const [period, setPeriod] = useState("12months");
+  const [plans, setPlans] = useState([]);
   const [rowH, setRowH] = useState(60);
   const [freqW, setFreqW] = useState(100);
   const [qtyW, setQtyW] = useState(80);
+
+  // Load data from JSON file based on selected period
+  useEffect(() => {
+    // Get data for the selected period from JSON
+    const periodData = jsonData.topSellingSubscriptionPlans[period];
+    setPlans(periodData);
+  }, [period]);
 
   useEffect(() => {
     const update = () => {
@@ -154,9 +157,9 @@ export default function Top5SellingSubscriptionPlans() {
         }}>Quantity</div>
       </div>
 
-      {/* Rows */}
+      {/* Rows - Show only first 5 items */}
       <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-        {plans.map((item) => (
+        {plans.slice(0, 5).map((item) => (
           <div
             key={item.key}
             style={{

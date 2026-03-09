@@ -1,20 +1,53 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
+import Topdata from "../Topdata.json";
 
-export default function TotalSalesChart() {
+const MONTH_KEYS = [
+  "january", "february", "march", "april", "may", "june",
+  "july", "august", "september", "october", "november", "december"
+];
+
+// Dynamic legend labels based on filter
+function getLegendLabels(filter) {
+  if (filter === "today") return ["Today", "Yesterday"];
+  if (filter === "yesterday") return ["Yesterday", "2 Days Ago"];
+  if (filter === "thisweek") return ["This Week", "Last Week"];
+  if (filter === "lastweek") return ["Last Week", "Prev Week"];
+  if (filter === "lastmonth") return ["Last Month", "Prev Month"];
+  if (MONTH_KEYS.includes(filter)) {
+    const label = filter.charAt(0).toUpperCase() + filter.slice(1);
+    return [label, "Prev " + label];
+  }
+  return ["Jan–Jun, 2025", "Jan–Dec, 2024"];
+}
+
+export default function TotalSalesChart({ filter = "thismonth" }) {
+  const isMonth = MONTH_KEYS.includes(filter);
+  const d = isMonth
+    ? (Topdata.months[filter]?.totalSales || Topdata.months["january"].totalSales)
+    : (Topdata[filter]?.totalSales || Topdata["thismonth"].totalSales);
+
+  const allVals = [...d.current, ...d.previous];
+  const dataMin = Math.min(...allVals);
+  const dataMax = Math.max(...allVals);
+  const yMin = Math.max(0, Math.floor(dataMin / 1000) * 1000 - 1000);
+  const yMax = Math.ceil(dataMax / 1000) * 1000 + 1000;
+
+  const [label1, label2] = getLegendLabels(filter);
+
   const options = {
     chart: { type: "line", toolbar: { show: false } },
     stroke: { curve: "smooth", width: [2, 3], dashArray: [5, 0] },
     colors: ["#a5c8ed", "#1a73e8"],
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      categories: d.categories,
       axisBorder: { show: false },
       axisTicks: { show: false },
       labels: { style: { colors: "#9CA3AF", fontSize: "11px" } },
     },
     yaxis: {
-      min: 4000,
-      max: 10000,
+      min: yMin,
+      max: yMax,
       tickAmount: 3,
       labels: {
         style: { colors: "#9CA3AF", fontSize: "11px" },
@@ -28,8 +61,8 @@ export default function TotalSalesChart() {
   };
 
   const series = [
-    { name: "2024", data: [6000, 6000, 6000, 6000, 4000, 4000] },
-    { name: "2025", data: [4000, 4000, 4000, 4000, 9999, 10000] },
+    { name: label2, data: d.previous },
+    { name: label1, data: d.current },
   ];
 
   return (
@@ -42,9 +75,9 @@ export default function TotalSalesChart() {
         <h2
           className="m-0 font-bold"
           style={{
-            width: 103,           // fixed width
+            width: 103,
             height: 28,
-            fontSize: 16,         // chhoto kore dilam
+            fontSize: 16,
             color: "#111827",
             fontWeight: 700,
             lineHeight: "28px",
@@ -57,14 +90,14 @@ export default function TotalSalesChart() {
           className="font-bold text-gray-900"
           style={{
             height: 28,
-            fontSize: 16,         // match h2
+            fontSize: 16,
             lineHeight: "28px",
             color: "#111827",
             fontWeight: 700,
             fontFamily: "'DM Sans', sans-serif",
           }}
         >
-          $756K
+          {d.totalLabel}
         </span>
       </div>
 
@@ -75,6 +108,7 @@ export default function TotalSalesChart() {
           series={series}
           type="line"
           height="100%"
+          key={filter}
         />
       </div>
 
@@ -82,32 +116,17 @@ export default function TotalSalesChart() {
       <div className="flex gap-2 justify-end mt-3 flex-nowrap overflow-x-auto">
         <span
           className="flex items-center gap-1 font-bold text-black px-2 py-0.5 rounded-md whitespace-nowrap"
-          style={{
-            fontSize: 11,
-            background:
-              "var(--neutral-transparent-16, rgba(153, 153, 153, 0.16))",
-          }}
+          style={{ fontSize: 11, background: "var(--neutral-transparent-16, rgba(153,153,153,0.16))" }}
         >
-          <span
-            className="inline-block rounded-sm"
-            style={{ width: 16, height: 2, background: "#1a73e8" }}
-          />
-          Jan–Jun, 2025
+          <span className="inline-block rounded-sm" style={{ width: 16, height: 2, background: "#1a73e8" }} />
+          {label1}
         </span>
-
         <span
           className="flex items-center gap-1 font-bold text-black px-2 py-0.5 rounded-md whitespace-nowrap"
-          style={{
-            fontSize: 11,
-            background:
-              "var(--neutral-transparent-16, rgba(153, 153, 153, 0.16))",
-          }}
+          style={{ fontSize: 11, background: "var(--neutral-transparent-16, rgba(153,153,153,0.16))" }}
         >
-          <span
-            className="inline-block rounded-sm"
-            style={{ width: 16, height: 2, background: "#a5c8ed" }}
-          />
-          Jan–Dec, 2024
+          <span className="inline-block rounded-sm" style={{ width: 16, height: 2, background: "#a5c8ed" }} />
+          {label2}
         </span>
       </div>
     </div>

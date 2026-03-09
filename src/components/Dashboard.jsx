@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TopBar from "./TopBar";
 import DateFilter from "./DateFilter";
 import KeyMetricsStore from "./KeyMetricsStore";
@@ -11,33 +11,34 @@ import Top5SellingProducts from "./Top5SellingProducts";
 import Top5SellingSubscriptionPlans from "./Top5SellingSubscriptionPlans";
 
 export default function Dashboard() {
+  const [filter, setFilter] = useState("thismonth");
+
   return (
     <div
       style={{
-        // Spec: width=1160, left=280px, padding=32px, gap=48px
         flex: 1,
         minWidth: 0,
         background: "#fff",
         overflowY: "auto",
         minHeight: "100vh",
-        padding: 32,               // padding: 32px all sides
+        padding: 32,
         boxSizing: "border-box",
         display: "flex",
         flexDirection: "column",
-        gap: 48,                   // gap: 48px between all top-level sections
+        gap: 48,
       }}
     >
       {/* ── Top Bar ── */}
       <TopBar />
 
       {/* ── Date Filter ── */}
-      <DateFilter />
+      <DateFilter onFilterChange={setFilter} />
 
       {/* ── Key Metrics: Store ── */}
-      <KeyMetricsStore />
+      <KeyMetricsStore filter={filter} />
 
       {/* ── Key Metrics: LMS ── */}
-      <KeyMetricsLMS />
+      <KeyMetricsLMS filter={filter} />
 
       {/* ── Charts Row ── */}
       <div
@@ -47,13 +48,13 @@ export default function Dashboard() {
           flexWrap: "wrap",
         }}
       >
-        <TotalSalesChart />
-        <TotalOrdersChart />
-        <PaymentMethods />
+        <TotalSalesChart filter={filter} />
+        <TotalOrdersChart filter={filter} />
+        <PaymentMethods filter={filter} />
       </div>
 
       {/* ── Store Orders vs Subscriptions ── */}
-      <StoreOrdersVsSubscriptions />
+      <StoreOrdersVsSubscriptions filter={filter} />
 
       {/* ── Tables Row ── */}
       <div
@@ -78,7 +79,6 @@ export default function Dashboard() {
           .col-qty              { width: 55px !important; }
         }
         @media (max-width: 1280px) {
-          /* Stack charts and tables vertically below breakpoint */
           .charts-row,
           .tables-row {
             flex-direction: column !important;

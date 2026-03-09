@@ -1,20 +1,52 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
+import Topdata from "../Topdata.json";
 
-export default function TotalOrdersChart() {
+const MONTH_KEYS = [
+  "january", "february", "march", "april", "may", "june",
+  "july", "august", "september", "october", "november", "december"
+];
+
+function getLegendLabels(filter) {
+  if (filter === "today") return ["Today", "Yesterday"];
+  if (filter === "yesterday") return ["Yesterday", "2 Days Ago"];
+  if (filter === "thisweek") return ["This Week", "Last Week"];
+  if (filter === "lastweek") return ["Last Week", "Prev Week"];
+  if (filter === "lastmonth") return ["Last Month", "Prev Month"];
+  if (MONTH_KEYS.includes(filter)) {
+    const label = filter.charAt(0).toUpperCase() + filter.slice(1);
+    return [label, "Prev " + label];
+  }
+  return ["Jan–Jun, 2025", "Jan–Dec, 2024"];
+}
+
+export default function TotalOrdersChart({ filter = "thismonth" }) {
+  const isMonth = MONTH_KEYS.includes(filter);
+  const d = isMonth
+    ? (Topdata.months[filter]?.ordersChart || Topdata.months["january"].ordersChart)
+    : (Topdata[filter]?.ordersChart || Topdata["thismonth"].ordersChart);
+
+  const allVals = [...d.current, ...d.previous];
+  const dataMin = Math.min(...allVals);
+  const dataMax = Math.max(...allVals);
+  const yMin = Math.max(0, Math.floor(dataMin / 1000) * 1000 - 1000);
+  const yMax = Math.ceil(dataMax / 1000) * 1000 + 1000;
+
+  const [label1, label2] = getLegendLabels(filter);
+
   const options = {
     chart: { type: "line", toolbar: { show: false } },
     stroke: { curve: "smooth", width: [3, 2], dashArray: [0, 5] },
     colors: ["#1a73e8", "#a5c8ed"],
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      categories: d.categories,
       axisBorder: { show: false },
       axisTicks: { show: false },
       labels: { style: { colors: "#9CA3AF", fontSize: "11px" } },
     },
     yaxis: {
-      min: 4000,
-      max: 10000,
+      min: yMin,
+      max: yMax,
       tickAmount: 3,
       labels: {
         style: { colors: "#9CA3AF", fontSize: "11px" },
@@ -28,8 +60,8 @@ export default function TotalOrdersChart() {
   };
 
   const series = [
-    { name: "2025", data: [4000, 4000, 4000, 4000, 10000, 10000] },
-    { name: "2024", data: [6000, 6000, 6000, 6000, 4000, 4000] },
+    { name: label1, data: d.current },
+    { name: label2, data: d.previous },
   ];
 
   return (
@@ -42,9 +74,9 @@ export default function TotalOrdersChart() {
         <h2
           className="m-0 font-bold"
           style={{
-            width: 103,            // fixed width for header text
+            width: 103,
             height: 28,
-            fontSize: 16,          // smaller font to stay in line
+            fontSize: 16,
             lineHeight: "28px",
             color: "#111827",
             fontWeight: 700,
@@ -57,14 +89,14 @@ export default function TotalOrdersChart() {
           className="font-bold text-gray-900"
           style={{
             height: 28,
-            fontSize: 16,         // match header
+            fontSize: 16,
             lineHeight: "28px",
             color: "#111827",
             fontWeight: 700,
             fontFamily: "'DM Sans', sans-serif",
           }}
         >
-          9,836
+          {d.totalLabel}
         </span>
       </div>
 
@@ -75,6 +107,7 @@ export default function TotalOrdersChart() {
           series={series}
           type="line"
           height="100%"
+          key={filter}
         />
       </div>
 
@@ -82,32 +115,17 @@ export default function TotalOrdersChart() {
       <div className="flex gap-2 justify-end mt-3 flex-nowrap overflow-x-auto">
         <span
           className="flex items-center gap-1 font-bold text-black px-2 py-0.5 rounded-md whitespace-nowrap"
-          style={{
-            fontSize: 11,
-            background:
-              "var(--neutral-transparent-16, rgba(153, 153, 153, 0.16))",
-          }}
+          style={{ fontSize: 11, background: "var(--neutral-transparent-16, rgba(153,153,153,0.16))" }}
         >
-          <span
-            className="inline-block rounded-sm"
-            style={{ width: 16, height: 2, background: "#1a73e8" }}
-          />
-          Jan–Jun, 2025
+          <span className="inline-block rounded-sm" style={{ width: 16, height: 2, background: "#1a73e8" }} />
+          {label1}
         </span>
-
         <span
           className="flex items-center gap-1 font-bold text-black px-2 py-0.5 rounded-md whitespace-nowrap"
-          style={{
-            fontSize: 11,
-            background:
-              "var(--neutral-transparent-16, rgba(153, 153, 153, 0.16))",
-          }}
+          style={{ fontSize: 11, background: "var(--neutral-transparent-16, rgba(153,153,153,0.16))" }}
         >
-          <span
-            className="inline-block rounded-sm"
-            style={{ width: 16, height: 2, background: "#a5c8ed" }}
-          />
-          Jan–Dec, 2024
+          <span className="inline-block rounded-sm" style={{ width: 16, height: 2, background: "#a5c8ed" }} />
+          {label2}
         </span>
       </div>
     </div>

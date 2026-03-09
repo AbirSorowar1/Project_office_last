@@ -11,6 +11,7 @@ const PRESETS = [
 ];
 
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const MONTH_KEYS = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
 const DAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
 function getDaysInMonth(year, month) {
@@ -18,7 +19,6 @@ function getDaysInMonth(year, month) {
 }
 
 function getFirstDayOfMonth(year, month) {
-  // 0=Sun..6=Sat, convert to Mo=0
   const day = new Date(year, month, 1).getDay();
   return day === 0 ? 6 : day - 1;
 }
@@ -54,17 +54,26 @@ function Calendar({ onSelect }) {
     cells.push({ day: d, other: true });
   }
 
-  const isToday = (d, other) => !other && d === today.getDate() && viewMonth === today.getMonth() && viewYear === today.getFullYear();
+  const isToday = (d, other) =>
+    !other && d === today.getDate() && viewMonth === today.getMonth() && viewYear === today.getFullYear();
 
   return (
     <div style={{ padding: "12px 14px", minWidth: 230 }}>
-      {/* Header */}
+      {/* Month name as clickable — click month header to select that month */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
         <div style={{ display: "flex", gap: 2 }}>
           <NavBtn onClick={() => { setViewMonth(0); setViewYear(y => y - 1); }}>«</NavBtn>
           <NavBtn onClick={prevMonth}>‹</NavBtn>
         </div>
-        <span style={{ fontWeight: 600, fontSize: 14, color: "#1a1a1a" }}>
+        {/* Clicking month name selects that whole month */}
+        <span
+          onClick={() => onSelect && onSelect({ type: "month", monthKey: MONTH_KEYS[viewMonth], year: viewYear })}
+          style={{
+            fontWeight: 600, fontSize: 14, color: "#1677ff",
+            cursor: "pointer", textDecoration: "underline dotted",
+          }}
+          title="Click to select this month"
+        >
           {MONTHS[viewMonth]} {viewYear}
         </span>
         <div style={{ display: "flex", gap: 2 }}>
@@ -83,7 +92,7 @@ function Calendar({ onSelect }) {
       {/* Cells */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", textAlign: "center", gap: "2px 0" }}>
         {cells.map((cell, i) => {
-          const isSel = !cell.other && cell.day === selected && viewMonth === viewMonth;
+          const isSel = !cell.other && cell.day === selected;
           const isT = isToday(cell.day, cell.other);
           return (
             <div
@@ -91,7 +100,7 @@ function Calendar({ onSelect }) {
               onClick={() => {
                 if (!cell.other) {
                   setSelected(cell.day);
-                  onSelect && onSelect(new Date(viewYear, viewMonth, cell.day));
+                  onSelect && onSelect({ type: "day", date: new Date(viewYear, viewMonth, cell.day) });
                 }
               }}
               style={{
@@ -112,6 +121,11 @@ function Calendar({ onSelect }) {
           );
         })}
       </div>
+
+      {/* Hint text */}
+      <div style={{ fontSize: 11, color: "#aaa", textAlign: "center", marginTop: 8 }}>
+        Click month name to select whole month
+      </div>
     </div>
   );
 }
@@ -129,12 +143,11 @@ function NavBtn({ onClick, children }) {
   );
 }
 
-export default function DateFilter() {
-  const [selected, setSelected] = useState("6months");
+export default function DateFilter({ onFilterChange }) {
+  const [selected, setSelected] = useState("thismonth");
   const [open, setOpen] = useState(false);
+  const [label, setLabel] = useState("This Month");
   const ref = useRef(null);
-
-  const selectedLabel = PRESETS.find(p => p.value === selected)?.label || "Last 6 months";
 
   useEffect(() => {
     const handler = (e) => {
@@ -143,6 +156,30 @@ export default function DateFilter() {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
+
+  const handlePresetClick = (preset) => {
+    setSelected(preset.value);
+    setLabel(preset.label);
+    onFilterChange && onFilterChange(preset.value);
+    if (preset.value !== "custom") setOpen(false);
+  };
+
+  const handleCalendarSelect = (info) => {
+    if (info.type === "month") {
+      const monthLabel = MONTHS[MONTH_KEYS.indexOf(info.monthKey)] + " " + info.year;
+      setSelected("custom");
+      setLabel(monthLabel);
+      onFilterChange && onFilterChange(info.monthKey); // e.g. "january"
+      setOpen(false);
+    } else {
+      const d = info.date;
+      const dateLabel = d.getDate() + " " + MONTHS[d.getMonth()] + " " + d.getFullYear();
+      setSelected("custom");
+      setLabel(dateLabel);
+      onFilterChange && onFilterChange("custom");
+      setOpen(false);
+    }
+  };
 
   return (
     <div ref={ref} style={{ position: "relative", display: "inline-block", fontFamily: "system-ui, sans-serif" }}>
@@ -155,10 +192,10 @@ export default function DateFilter() {
           borderRadius: 8, background: "#fff", cursor: "pointer",
           fontSize: 14, color: "#1a1a1a", fontWeight: 500,
           boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
-          minWidth: 144,
+          minWidth: 160,
         }}
       >
-        <span style={{ flex: 1, textAlign: "left" }}>{selectedLabel}</span>
+        <span style={{ flex: 1, textAlign: "left" }}>{label}</span>
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
           <path d="M2 4l4 4 4-4" stroke="#888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -178,7 +215,7 @@ export default function DateFilter() {
             {PRESETS.map(p => (
               <div
                 key={p.value}
-                onClick={() => { setSelected(p.value); if (p.value !== "custom") setOpen(false); }}
+                onClick={() => handlePresetClick(p)}
                 style={{
                   padding: "7px 16px",
                   fontSize: 13.5,
@@ -199,10 +236,7 @@ export default function DateFilter() {
           </div>
 
           {/* Calendar */}
-          <Calendar onSelect={(date) => {
-            setSelected("custom");
-            // You can lift this date up via a prop callback
-          }} />
+          <Calendar onSelect={handleCalendarSelect} />
         </div>
       )}
     </div>

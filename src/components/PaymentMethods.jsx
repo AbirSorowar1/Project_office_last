@@ -1,13 +1,20 @@
 import React from "react";
+import Topdata from "../Topdata.json";
 
-const methods = [
-  { label: "Credit / Debit Card", percent: 51, color: "#2563eb", patId: "pm-pat-0" },
-  { label: "Mobile Wallet", percent: 20, color: "#818cf8", patId: "pm-pat-1" },
-  { label: "Cash", percent: 7, color: "#6ebf91", patId: "pm-pat-2" },
-  { label: "Gift Card", percent: 22, color: "#ffb84d", patId: "pm-pat-3" },
+const MONTH_KEYS = [
+  "january", "february", "march", "april", "may", "june",
+  "july", "august", "september", "october", "november", "december"
 ];
 
-export default function PaymentMethods() {
+export default function PaymentMethods({ filter = "thismonth" }) {
+  const isMonth = MONTH_KEYS.includes(filter);
+  const methods = isMonth
+    ? (Topdata.months[filter]?.paymentMethods || Topdata.months["january"].paymentMethods)
+    : (Topdata[filter]?.paymentMethods || Topdata["thismonth"].paymentMethods);
+
+  // Assign unique pattern IDs per render
+  const segments_data = methods.map((m, i) => ({ ...m, patId: `pm-pat-${i}` }));
+
   const total = methods.reduce((s, m) => s + m.percent, 0);
   const GAP = 3;
   const totalGaps = (methods.length - 1) * GAP;
@@ -16,7 +23,7 @@ export default function PaymentMethods() {
   const H = 80;
 
   let x = 0;
-  const segments = methods.map((m, i) => {
+  const segments = segments_data.map((m, i) => {
     const w = (m.percent / total) * availableWidth;
     const rx = x;
     x += w + GAP;
@@ -80,14 +87,7 @@ export default function PaymentMethods() {
                 patternTransform="rotate(45 0 0)"
               >
                 <rect width="10" height="10" fill={m.color} />
-                <line
-                  x1="5"
-                  y1="0"
-                  x2="5"
-                  y2="10"
-                  stroke="white"
-                  strokeWidth="0.7"
-                />
+                <line x1="5" y1="0" x2="5" y2="10" stroke="white" strokeWidth="0.7" />
               </pattern>
             ))}
           </defs>
@@ -110,20 +110,14 @@ export default function PaymentMethods() {
               </svg>
               <span
                 className="text-sm font-semibold"
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  color: "#4B5563",
-                }}
+                style={{ fontFamily: "'DM Sans', sans-serif", color: "#4B5563" }}
               >
                 {m.label}
               </span>
             </div>
             <span
               className="text-sm font-bold"
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                color: "#111827",
-              }}
+              style={{ fontFamily: "'DM Sans', sans-serif", color: "#111827" }}
             >
               {m.percent}%
             </span>

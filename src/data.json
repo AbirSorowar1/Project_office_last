@@ -1,0 +1,722 @@
+{
+    "topSellingProducts": {
+        "12months": [
+            {
+                "key": 1,
+                "product": "Creation Story – Genesis Curriculum",
+                "price": "$320",
+                "quantity": 18,
+                "disabled": false
+            },
+            {
+                "key": 2,
+                "product": "Noah's Ark – Faith and Trust Curriculum",
+                "price": "$275",
+                "quantity": 16,
+                "disabled": true
+            },
+            {
+                "key": 3,
+                "product": "Story of Jonah – Obedience Curriculum",
+                "price": "$310",
+                "quantity": 15,
+                "disabled": false
+            },
+            {
+                "key": 4,
+                "product": "Birth of Jesus – The Gift of Love Curriculum",
+                "price": "$289",
+                "quantity": 13,
+                "disabled": true
+            },
+            {
+                "key": 5,
+                "product": "Story of Esther – Courage and Loyalty Curriculum",
+                "price": "$285",
+                "quantity": 12,
+                "disabled": false
+            },
+            {
+                "key": 6,
+                "product": "David and Goliath – Faith Over Fear",
+                "price": "$295",
+                "quantity": 11,
+                "disabled": false
+            },
+            {
+                "key": 7,
+                "product": "Moses – The Great Leader",
+                "price": "$340",
+                "quantity": 10,
+                "disabled": true
+            },
+            {
+                "key": 8,
+                "product": "Daniel in the Lion's Den",
+                "price": "$265",
+                "quantity": 9,
+                "disabled": false
+            },
+            {
+                "key": 9,
+                "product": "The Prodigal Son – Forgiveness",
+                "price": "$305",
+                "quantity": 8,
+                "disabled": false
+            },
+            {
+                "key": 10,
+                "product": "Joseph's Colorful Coat",
+                "price": "$255",
+                "quantity": 7,
+                "disabled": true
+            }
+        ],
+        "6months": [
+            {
+                "key": 1,
+                "product": "Bible Basics – New Testament Overview",
+                "price": "$310",
+                "quantity": 12,
+                "disabled": false
+            },
+            {
+                "key": 2,
+                "product": "Psalm 23 – The Lord is My Shepherd",
+                "price": "$265",
+                "quantity": 11,
+                "disabled": true
+            },
+            {
+                "key": 3,
+                "product": "The Ten Commandments – Rules to Live By",
+                "price": "$300",
+                "quantity": 10,
+                "disabled": false
+            },
+            {
+                "key": 4,
+                "product": "Fruits of the Spirit – Character Building",
+                "price": "$279",
+                "quantity": 9,
+                "disabled": true
+            },
+            {
+                "key": 5,
+                "product": "The Beatitudes – Blessed Are...",
+                "price": "$275",
+                "quantity": 8,
+                "disabled": false
+            },
+            {
+                "key": 6,
+                "product": "Solomon's Wisdom – Proverbs for Kids",
+                "price": "$285",
+                "quantity": 7,
+                "disabled": false
+            },
+            {
+                "key": 7,
+                "product": "Ruth and Naomi – Loyalty and Love",
+                "price": "$330",
+                "quantity": 6,
+                "disabled": true
+            },
+            {
+                "key": 8,
+                "product": "Paul's Journey – Missionary Tales",
+                "price": "$255",
+                "quantity": 5,
+                "disabled": false
+            },
+            {
+                "key": 9,
+                "product": "The Good Samaritan – Helping Others",
+                "price": "$295",
+                "quantity": 4,
+                "disabled": false
+            },
+            {
+                "key": 10,
+                "product": "Zacchaeus – A Change of Heart",
+                "price": "$245",
+                "quantity": 3,
+                "disabled": true
+            }
+        ],
+        "3months": [
+            {
+                "key": 1,
+                "product": "Easter Story – Resurrection Sunday",
+                "price": "$300",
+                "quantity": 8,
+                "disabled": false
+            },
+            {
+                "key": 2,
+                "product": "Christmas Story – Birth of Jesus",
+                "price": "$255",
+                "quantity": 7,
+                "disabled": true
+            },
+            {
+                "key": 3,
+                "product": "Thanksgiving – Harvest Blessings",
+                "price": "$290",
+                "quantity": 6,
+                "disabled": false
+            },
+            {
+                "key": 4,
+                "product": "Praise & Worship – Sing to the Lord",
+                "price": "$269",
+                "quantity": 5,
+                "disabled": true
+            },
+            {
+                "key": 5,
+                "product": "Prayer Warriors – Talking to God",
+                "price": "$265",
+                "quantity": 4,
+                "disabled": false
+            },
+            {
+                "key": 6,
+                "product": "Armor of God – Spiritual Protection",
+                "price": "$275",
+                "quantity": 4,
+                "disabled": false
+            },
+            {
+                "key": 7,
+                "product": "Miracles of Jesus – Walking on Water",
+                "price": "$320",
+                "quantity": 3,
+                "disabled": true
+            },
+            {
+                "key": 8,
+                "product": "Parables – Stories Jesus Told",
+                "price": "$245",
+                "quantity": 3,
+                "disabled": false
+            },
+            {
+                "key": 9,
+                "product": "Apostles – Jesus' Disciples",
+                "price": "$285",
+                "quantity": 2,
+                "disabled": false
+            },
+            {
+                "key": 10,
+                "product": "Heaven – Our Eternal Home",
+                "price": "$235",
+                "quantity": 2,
+                "disabled": true
+            }
+        ],
+        "monthly": [
+            {
+                "January": [
+                    {
+                        "key": 1,
+                        "product": "New Beginnings – January Series",
+                        "price": "$295",
+                        "quantity": 5,
+                        "disabled": false
+                    },
+                    {
+                        "key": 2,
+                        "product": "Winter Wonder – God's Creation",
+                        "price": "$250",
+                        "quantity": 4,
+                        "disabled": true
+                    },
+                    {
+                        "key": 3,
+                        "product": "Snowflakes and Scriptures",
+                        "price": "$285",
+                        "quantity": 4,
+                        "disabled": false
+                    }
+                ],
+                "February": [
+                    {
+                        "key": 1,
+                        "product": "Love One Another – Valentine Special",
+                        "price": "$280",
+                        "quantity": 6,
+                        "disabled": true
+                    },
+                    {
+                        "key": 2,
+                        "product": "Friendship – Biblical Friends",
+                        "price": "$270",
+                        "quantity": 5,
+                        "disabled": false
+                    },
+                    {
+                        "key": 3,
+                        "product": "Hearts for Jesus – February Faith",
+                        "price": "$290",
+                        "quantity": 5,
+                        "disabled": false
+                    }
+                ],
+                "March": [
+                    {
+                        "key": 1,
+                        "product": "Spring Revival – New Life in Christ",
+                        "price": "$335",
+                        "quantity": 4,
+                        "disabled": true
+                    },
+                    {
+                        "key": 2,
+                        "product": "St. Patrick – Sharing Faith",
+                        "price": "$260",
+                        "quantity": 4,
+                        "disabled": false
+                    },
+                    {
+                        "key": 3,
+                        "product": "Marching for Jesus",
+                        "price": "$300",
+                        "quantity": 3,
+                        "disabled": false
+                    }
+                ],
+                "April": [
+                    {
+                        "key": 1,
+                        "product": "Easter Eggs – Resurrection Joy",
+                        "price": "$250",
+                        "quantity": 3,
+                        "disabled": true
+                    },
+                    {
+                        "key": 2,
+                        "product": "Spring Showers – God's Blessings",
+                        "price": "$310",
+                        "quantity": 4,
+                        "disabled": false
+                    },
+                    {
+                        "key": 3,
+                        "product": "New Flowers – New Creation",
+                        "price": "$265",
+                        "quantity": 3,
+                        "disabled": true
+                    }
+                ],
+                "May": [
+                    {
+                        "key": 1,
+                        "product": "Mother's Day – A Godly Mother",
+                        "price": "$295",
+                        "quantity": 5,
+                        "disabled": false
+                    },
+                    {
+                        "key": 2,
+                        "product": "Mary – Jesus' Mother",
+                        "price": "$275",
+                        "quantity": 4,
+                        "disabled": true
+                    },
+                    {
+                        "key": 3,
+                        "product": "Flowers and Faith – May Moments",
+                        "price": "$280",
+                        "quantity": 4,
+                        "disabled": false
+                    }
+                ],
+                "June": [
+                    {
+                        "key": 1,
+                        "product": "Father's Day – A Godly Father",
+                        "price": "$295",
+                        "quantity": 6,
+                        "disabled": false
+                    },
+                    {
+                        "key": 2,
+                        "product": "Summer Sun – Son of God",
+                        "price": "$345",
+                        "quantity": 5,
+                        "disabled": true
+                    },
+                    {
+                        "key": 3,
+                        "product": "Vacation Bible School – VBS Special",
+                        "price": "$265",
+                        "quantity": 5,
+                        "disabled": false
+                    }
+                ]
+            }
+        ]
+    },
+    "topSellingSubscriptionPlans": {
+        "12months": [
+            {
+                "key": 1,
+                "plan": "Bible Story Images",
+                "frequency": "Monthly",
+                "quantity": 18,
+                "disabled": false
+            },
+            {
+                "key": 2,
+                "plan": "VBSify",
+                "frequency": "Quarterly",
+                "quantity": 16,
+                "disabled": true
+            },
+            {
+                "key": 3,
+                "plan": "Weekly Curriculum",
+                "frequency": "Weekly",
+                "quantity": 15,
+                "disabled": false
+            },
+            {
+                "key": 4,
+                "plan": "Big Burrito",
+                "frequency": "Monthly",
+                "quantity": 13,
+                "disabled": true
+            },
+            {
+                "key": 5,
+                "plan": "Whole Enchilada",
+                "frequency": "Yearly",
+                "quantity": 12,
+                "disabled": false
+            },
+            {
+                "key": 6,
+                "plan": "Sunday School Plus",
+                "frequency": "Monthly",
+                "quantity": 11,
+                "disabled": false
+            },
+            {
+                "key": 7,
+                "plan": "Kids Church Bundle",
+                "frequency": "Quarterly",
+                "quantity": 10,
+                "disabled": true
+            },
+            {
+                "key": 8,
+                "plan": "Preschool Praise",
+                "frequency": "Weekly",
+                "quantity": 9,
+                "disabled": false
+            },
+            {
+                "key": 9,
+                "plan": "Teen Discipleship",
+                "frequency": "Monthly",
+                "quantity": 8,
+                "disabled": false
+            },
+            {
+                "key": 10,
+                "plan": "Family Devotions",
+                "frequency": "Yearly",
+                "quantity": 7,
+                "disabled": true
+            }
+        ],
+        "6months": [
+            {
+                "key": 1,
+                "plan": "Bible Story Images Lite",
+                "frequency": "Monthly",
+                "quantity": 12,
+                "disabled": false
+            },
+            {
+                "key": 2,
+                "plan": "VBS Express",
+                "frequency": "Quarterly",
+                "quantity": 11,
+                "disabled": true
+            },
+            {
+                "key": 3,
+                "plan": "Mid-Week Curriculum",
+                "frequency": "Weekly",
+                "quantity": 10,
+                "disabled": false
+            },
+            {
+                "key": 4,
+                "plan": "Little Fajita",
+                "frequency": "Monthly",
+                "quantity": 9,
+                "disabled": true
+            },
+            {
+                "key": 5,
+                "plan": "Taco Tuesday Pack",
+                "frequency": "Yearly",
+                "quantity": 8,
+                "disabled": false
+            },
+            {
+                "key": 6,
+                "plan": "Children's Church Pro",
+                "frequency": "Monthly",
+                "quantity": 7,
+                "disabled": false
+            },
+            {
+                "key": 7,
+                "plan": "Youth Group Essentials",
+                "frequency": "Quarterly",
+                "quantity": 6,
+                "disabled": true
+            },
+            {
+                "key": 8,
+                "plan": "Toddler Time",
+                "frequency": "Weekly",
+                "quantity": 5,
+                "disabled": false
+            },
+            {
+                "key": 9,
+                "plan": "Adult Bible Study",
+                "frequency": "Monthly",
+                "quantity": 4,
+                "disabled": false
+            },
+            {
+                "key": 10,
+                "plan": "Small Group Kit",
+                "frequency": "Yearly",
+                "quantity": 3,
+                "disabled": true
+            }
+        ],
+        "3months": [
+            {
+                "key": 1,
+                "plan": "Bible Story Images Mini",
+                "frequency": "Monthly",
+                "quantity": 8,
+                "disabled": false
+            },
+            {
+                "key": 2,
+                "plan": "VBS Starter",
+                "frequency": "Quarterly",
+                "quantity": 7,
+                "disabled": true
+            },
+            {
+                "key": 3,
+                "plan": "Summer Curriculum",
+                "frequency": "Weekly",
+                "quantity": 6,
+                "disabled": false
+            },
+            {
+                "key": 4,
+                "plan": "Mini Burrito",
+                "frequency": "Monthly",
+                "quantity": 5,
+                "disabled": true
+            },
+            {
+                "key": 5,
+                "plan": "Enchilada Bites",
+                "frequency": "Yearly",
+                "quantity": 4,
+                "disabled": false
+            },
+            {
+                "key": 6,
+                "plan": "Vacation Bible School",
+                "frequency": "Monthly",
+                "quantity": 4,
+                "disabled": false
+            },
+            {
+                "key": 7,
+                "plan": "Camp Curriculum",
+                "frequency": "Quarterly",
+                "quantity": 3,
+                "disabled": true
+            },
+            {
+                "key": 8,
+                "plan": "Back to School Bundle",
+                "frequency": "Weekly",
+                "quantity": 3,
+                "disabled": false
+            },
+            {
+                "key": 9,
+                "plan": "Holiday Special",
+                "frequency": "Monthly",
+                "quantity": 2,
+                "disabled": false
+            },
+            {
+                "key": 10,
+                "plan": "Seasonal Pass",
+                "frequency": "Yearly",
+                "quantity": 2,
+                "disabled": true
+            }
+        ],
+        "monthly": [
+            {
+                "January": [
+                    {
+                        "key": 1,
+                        "plan": "New Year Bundle",
+                        "frequency": "Monthly",
+                        "quantity": 6,
+                        "disabled": false
+                    },
+                    {
+                        "key": 2,
+                        "plan": "Winter Session",
+                        "frequency": "Weekly",
+                        "quantity": 5,
+                        "disabled": true
+                    },
+                    {
+                        "key": 3,
+                        "plan": "January Jumpstart",
+                        "frequency": "Monthly",
+                        "quantity": 5,
+                        "disabled": false
+                    }
+                ],
+                "February": [
+                    {
+                        "key": 1,
+                        "plan": "Love Series",
+                        "frequency": "Monthly",
+                        "quantity": 7,
+                        "disabled": true
+                    },
+                    {
+                        "key": 2,
+                        "plan": "Friendship Bundle",
+                        "frequency": "Quarterly",
+                        "quantity": 6,
+                        "disabled": false
+                    },
+                    {
+                        "key": 3,
+                        "plan": "Valentine Special",
+                        "frequency": "Weekly",
+                        "quantity": 6,
+                        "disabled": false
+                    }
+                ],
+                "March": [
+                    {
+                        "key": 1,
+                        "plan": "Spring Forward Pack",
+                        "frequency": "Monthly",
+                        "quantity": 5,
+                        "disabled": true
+                    },
+                    {
+                        "key": 2,
+                        "plan": "St. Patrick's Lesson",
+                        "frequency": "Quarterly",
+                        "quantity": 5,
+                        "disabled": false
+                    },
+                    {
+                        "key": 3,
+                        "plan": "March Madness",
+                        "frequency": "Weekly",
+                        "quantity": 4,
+                        "disabled": false
+                    }
+                ],
+                "April": [
+                    {
+                        "key": 1,
+                        "plan": "Easter Special",
+                        "frequency": "Monthly",
+                        "quantity": 6,
+                        "disabled": false
+                    },
+                    {
+                        "key": 2,
+                        "plan": "Spring Break Kit",
+                        "frequency": "Quarterly",
+                        "quantity": 5,
+                        "disabled": true
+                    },
+                    {
+                        "key": 3,
+                        "plan": "April Showers",
+                        "frequency": "Weekly",
+                        "quantity": 5,
+                        "disabled": false
+                    }
+                ],
+                "May": [
+                    {
+                        "key": 1,
+                        "plan": "Mother's Day Bundle",
+                        "frequency": "Monthly",
+                        "quantity": 7,
+                        "disabled": false
+                    },
+                    {
+                        "key": 2,
+                        "plan": "Spring Celebration",
+                        "frequency": "Quarterly",
+                        "quantity": 6,
+                        "disabled": true
+                    },
+                    {
+                        "key": 3,
+                        "plan": "May Flowers Pack",
+                        "frequency": "Weekly",
+                        "quantity": 6,
+                        "disabled": false
+                    }
+                ],
+                "June": [
+                    {
+                        "key": 1,
+                        "plan": "Father's Day Special",
+                        "frequency": "Monthly",
+                        "quantity": 8,
+                        "disabled": false
+                    },
+                    {
+                        "key": 2,
+                        "plan": "Summer Start",
+                        "frequency": "Quarterly",
+                        "quantity": 7,
+                        "disabled": true
+                    },
+                    {
+                        "key": 3,
+                        "plan": "VBS Preparation",
+                        "frequency": "Weekly",
+                        "quantity": 7,
+                        "disabled": false
+                    }
+                ]
+            }
+        ]
+    }
+}

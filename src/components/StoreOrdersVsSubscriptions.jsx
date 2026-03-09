@@ -1,5 +1,11 @@
 import { useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
+import Topdata from "../Topdata.json";
+
+const MONTH_KEYS = [
+  "january", "february", "march", "april", "may", "june",
+  "july", "august", "september", "october", "november", "december"
+];
 
 // Inject reverse-slant (\) SVG patterns into DOM
 function injectPatterns() {
@@ -11,8 +17,7 @@ function injectPatterns() {
   const svgEl = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svgEl.setAttribute("width", "0");
   svgEl.setAttribute("height", "0");
-  svgEl.style.cssText =
-    "position:absolute;top:0;left:0;pointer-events:none;";
+  svgEl.style.cssText = "position:absolute;top:0;left:0;pointer-events:none;";
 
   svgEl.innerHTML = `
     <defs>
@@ -41,7 +46,7 @@ function applyPatterns() {
   });
 }
 
-export default function StoreOrdersVsSubscriptions() {
+export default function StoreOrdersVsSubscriptions({ filter = "thismonth" }) {
   useEffect(() => {
     injectPatterns();
   }, []);
@@ -49,6 +54,18 @@ export default function StoreOrdersVsSubscriptions() {
   const handleChartEvent = () => {
     setTimeout(() => applyPatterns(), 150);
   };
+
+  // Get correct data block
+  const isMonth = MONTH_KEYS.includes(filter);
+  const d = isMonth
+    ? (Topdata.months[filter]?.storeVsSubs || Topdata.months["january"].storeVsSubs)
+    : (Topdata[filter]?.storeVsSubs || Topdata["thismonth"].storeVsSubs);
+
+  // Dynamic yAxis max based on data
+  const allVals = [...d.subscriptions, ...d.orders];
+  const dataMax = Math.max(...allVals);
+  const yMax = Math.ceil(dataMax / 1000) * 1000 + 1000;
+  const tickAmt = 5;
 
   const options = {
     chart: {
@@ -77,18 +94,23 @@ export default function StoreOrdersVsSubscriptions() {
     colors: ["rgb(39,110,241)", "rgb(188,210,251)"],
     stroke: { show: false },
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      categories: d.categories,
       axisBorder: { show: false },
       axisTicks: { show: false },
-      labels: { style: { colors: "#9CA3AF", fontSize: "12px", fontFamily: "inherit" } },
+      labels: {
+        style: { colors: "#9CA3AF", fontSize: "12px", fontFamily: "inherit" },
+      },
     },
     yaxis: {
       min: 0,
-      max: 10000,
-      tickAmount: 5,
+      max: yMax,
+      tickAmount: tickAmt,
       labels: {
         style: { colors: "#9CA3AF", fontSize: "11px", fontFamily: "inherit" },
-        formatter: (val) => `$${(val / 1000).toFixed(0)}000`,
+        formatter: (val) => {
+          if (val >= 1000) return `$${(val / 1000).toFixed(0)}000`;
+          return `$${val}`;
+        },
       },
     },
     grid: {
@@ -113,7 +135,7 @@ export default function StoreOrdersVsSubscriptions() {
       intersect: false,
       style: { fontSize: "12px", fontFamily: "inherit" },
       custom: ({ series, dataPointIndex, w }) => {
-        const month = w.globals.labels[dataPointIndex];
+        const label = w.globals.labels[dataPointIndex];
         const subscriptions = series[0][dataPointIndex];
         const orders = series[1][dataPointIndex];
         return `
@@ -128,7 +150,7 @@ export default function StoreOrdersVsSubscriptions() {
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             min-width: 160px;
           ">
-            <div style="font-weight: 600; margin-bottom: 6px;">${month}</div>
+            <div style="font-weight: 600; margin-bottom: 6px;">${label}</div>
             <div style="color: #6B7280; margin-bottom: 3px;">
               Subscriptions: <span style="font-weight: 600; color: #111827;">${subscriptions.toLocaleString()}</span>
             </div>
@@ -142,8 +164,8 @@ export default function StoreOrdersVsSubscriptions() {
   };
 
   const series = [
-    { name: "Subscriptions", data: [7800, 8800, 3200, 4000, 8200, 7200] },
-    { name: "Orders", data: [2800, 4200, 2200, 1800, 3200, 2600] },
+    { name: "Subscriptions", data: d.subscriptions },
+    { name: "Orders", data: d.orders },
   ];
 
   return (
@@ -176,6 +198,7 @@ export default function StoreOrdersVsSubscriptions() {
         series={series}
         type="bar"
         height={290}
+        key={filter}
       />
     </div>
   );
